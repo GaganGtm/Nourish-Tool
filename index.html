@@ -59,12 +59,10 @@
         .guide-box h2, .guide-box h3 { margin-top: 0; color: #e91e63; border-bottom: 2px solid #eee; padding-bottom: 10px; font-size: 18px;}
         .tech-note { background-color: #fce4ec; border-left: 5px solid #e91e63; padding: 20px; margin-top: 20px; font-size: 14px; line-height: 1.6; border-radius: 0 8px 8px 0;}
         .tech-note h3 { margin-top: 0; color: #c2185b; border-bottom: none; font-size: 18px;}
-        .contact-box { background-color: #f8bbd0; color: #880e4f; padding: 15px; margin-top: 20px; text-align: center; border-radius: 8px; border: 1px solid #f48fb1; font-size: 14px; line-height: 1.5; }
-        .copyright-notice { font-size: 13px; color: #880e4f; background-color: #fce4ec; text-align: center; margin-top: 20px; padding: 15px; border: 1px solid #f8bbd0; border-radius: 8px; font-weight: bold; box-shadow: 0 2px 4px rgba(0,0,0,0.05);}
         
         /* Modal & PFD Form Styles */
-        .modal-overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.6); z-index: 2000; justify-content: center; align-items: center; }
-        .modal-content { background: #fff; width: 95%; max-width: 900px; max-height: 90vh; border-radius: 8px; display: flex; flex-direction: column; box-shadow: 0 5px 15px rgba(0,0,0,0.3); }
+        .modal-overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.7); z-index: 2000; justify-content: center; align-items: center; }
+        .modal-content { background: #fff; width: 95%; max-width: 900px; max-height: 95vh; border-radius: 8px; display: flex; flex-direction: column; box-shadow: 0 5px 15px rgba(0,0,0,0.3); }
         .modal-header { background: #9c27b0; color: white; padding: 15px 20px; border-radius: 8px 8px 0 0; display: flex; justify-content: space-between; align-items: center; }
         .modal-header h3 { margin: 0; font-size: 18px; }
         .modal-close { cursor: pointer; font-size: 24px; font-weight: bold; line-height: 1; }
@@ -89,20 +87,26 @@
         .score-orange { background: #ff9800; color: white; border-color: #f57c00; }
         .score-green { background: #4caf50; color: white; border-color: #388e3c; }
 
+        /* Report Styles (A4 Simulation inside Modal) */
+        .report-page { background: white; padding: 20px; font-family: Arial, sans-serif; color: #000; }
+        .report-title { text-align: center; color: #4a148c; font-size: 26px; font-weight: bold; margin-bottom: 10px; }
+        .report-line { border-top: 3px solid #4a148c; margin-bottom: 20px; }
+        .report-table { width: 100%; border-collapse: collapse; font-size: 14px; }
+        .report-table th, .report-table td { border: 2px solid #000; padding: 12px; text-align: left; }
+        .report-table th { width: 35%; color: #4a148c; font-weight: bold; background: #fafafa; }
+        
+        .txt-red { font-weight: bold; color: #d32f2f; }
+        .txt-orange { font-weight: bold; color: #f57c00; }
+        .txt-green { font-weight: bold; color: #388e3c; }
+        .txt-neutral { font-weight: bold; color: #333; }
+
         /* Print Overlay Styles */
-        #printArea { display: none; }
         @media print {
             body * { visibility: hidden; }
-            #printArea, #printArea * { visibility: visible; }
-            #printArea { display: block; position: absolute; left: 0; top: 0; width: 100%; padding: 20px; background: white;}
-            .print-header { text-align: center; color: #4a148c; margin-bottom: 20px; border-bottom: 2px solid #4a148c; padding-bottom: 10px; }
-            .print-table { width: 100%; border-collapse: collapse; margin-bottom: 20px; font-size: 14px;}
-            .print-table th, .print-table td { border: 1px solid #000; padding: 10px; text-align: left; }
-            .print-table th { background-color: #f3e5f5; width: 35%; color: #4a148c;}
-            .print-val-red { font-weight: bold; color: #d32f2f; }
-            .print-val-orange { font-weight: bold; color: #f57c00; }
-            .print-val-green { font-weight: bold; color: #388e3c; }
-            .print-val-neutral { font-weight: bold; color: #333; }
+            #reportPrintContent, #reportPrintContent * { visibility: visible; }
+            #reportPrintContent { position: absolute; left: 0; top: 0; width: 100%; height: 100%; margin: 0; padding: 20mm; }
+            .no-print { display: none !important; }
+            .report-table th, .report-table td { border: 1px solid #000 !important; }
         }
     </style>
 </head>
@@ -178,7 +182,6 @@
     <div id="pfd" class="tab-content" style="border-color: #9c27b0; background-color: #f3e5f5;">
         <div class="summary-table" style="max-width: 1150px; margin: 0 auto; background: white; padding: 20px; border-radius: 8px; border: 1px solid #ccc; box-shadow: 0 2px 4px rgba(0,0,0,0.05);">
             <div class="header-with-btn"><h3 style="margin: 0; color: #9c27b0; font-size: 18px;">Eligible Children for PFD Assessment</h3></div>
-            <p style="font-size: 13px; color: #555; margin-bottom: 15px;">Filters children: <strong>Age > 180 days</strong> AND <strong>DBI Category is B, C, D, E, or G</strong>.</p>
             <div class="table-scroll-container" style="max-height: 55vh;">
                 <table id="pfdTable">
                     <thead><tr>
@@ -194,6 +197,9 @@
                     <tbody id="pfdBody"></tbody>
                 </table>
             </div>
+            <p style="font-size: 13px; color: #555; margin-top: 15px; text-align: center;">
+                * Filters children: <strong>Age > 180 days</strong> AND <strong>DBI Category is B, C, D, E, or G</strong>.
+            </p>
         </div>
     </div>
 
@@ -219,11 +225,11 @@
     <!-- ================= PFD DIAGNOSTIC MODAL ================= -->
     <div id="pfdModal" class="modal-overlay">
         <div class="modal-content">
-            <div class="modal-header">
+            <div class="modal-header no-print">
                 <h3>Pediatric Feeding Disorder (PFD) Diagnostic Checklist</h3>
                 <span class="modal-close" onclick="closePfdModal()">&times;</span>
             </div>
-            <div class="modal-body">
+            <div class="modal-body no-print">
                 <div class="child-snapshot" id="modalChildSnapshot"></div>
 
                 <form id="pfdAssessmentForm">
@@ -328,16 +334,36 @@
                         </div>
                     </div>
                 </form>
+
+                <div style="padding: 10px 20px 0; font-style: italic; color: #555; font-size: 12px; text-align: center; border-top: 1px solid #eee;">
+                    * The Output report of the PFD Assessment is available for review and download on Report section.
+                </div>
             </div>
-            <div class="modal-footer">
+            <div class="modal-footer no-print">
                 <button onclick="closePfdModal()" style="padding: 8px 16px; border: 1px solid #ccc; background: white; border-radius: 4px; cursor: pointer; margin-right: 10px;">Cancel</button>
                 <button onclick="savePfdData()" style="padding: 8px 16px; border: none; background: #9c27b0; color: white; border-radius: 4px; font-weight: bold; cursor: pointer;">Save Assessment</button>
             </div>
         </div>
     </div>
 
-    <!-- Hidden Printable Report Overlay -->
-    <div id="printArea"></div>
+    <!-- ================= PRINTABLE REPORT MODAL (A4 Overlay) ================= -->
+    <div id="reportModal" class="modal-overlay">
+        <div class="modal-content" style="max-width: 800px;">
+            <div class="modal-header no-print">
+                <h3>View Report</h3>
+                <span class="modal-close" onclick="document.getElementById('reportModal').style.display='none'">&times;</span>
+            </div>
+            
+            <div class="modal-body" id="reportPrintContent" style="padding: 40px; background: white;">
+                <!-- PDF Content Injected Here -->
+            </div>
+            
+            <div class="modal-footer no-print">
+                <button onclick="document.getElementById('reportModal').style.display='none'" style="padding: 8px 16px; border: 1px solid #ccc; background: white; border-radius: 4px; cursor: pointer; margin-right: 10px;">Close</button>
+                <button onclick="window.print()" style="padding: 8px 16px; border: none; background: #2e7d32; color: white; border-radius: 4px; font-weight: bold; cursor: pointer;">📥 Download / Print PDF</button>
+            </div>
+        </div>
+    </div>
 
 <script>
     document.addEventListener('contextmenu', event => event.preventDefault());
@@ -147871,7 +147897,7 @@
         rowCount++; const tbody = document.getElementById('tableBody'); const tr = document.createElement('tr'); tr.id = `row-${rowCount}`; tr.dataset.ageDays = -1;
         let facility = data ? data[0] : ""; let child = data ? data[1] : ""; let sDate = data ? formatExcelDate(data[2]) : ""; let bDate = data ? formatExcelDate(data[3]) : ""; let gender = data ? data[4].toLowerCase().trim() : ""; let weight = data ? data[5] : ""; let height = data ? data[6] : "";
         let todayStr = new Date().toISOString().split('T')[0];
-        let html = `<td class="col-sn">${rowCount}</td><td class="col-fac"><input type="text" class="facility" value="${facility}"></td><td class="col-child"><input type="text" class="childName" value="${child}"></td><td class="col-date"><input type="date" class="surveyDate" value="${sDate}" max="${todayStr}" onchange="calcRow(${rowCount})"></td><td class="col-date"><input type="date" class="dob" value="${bDate}" max="${todayStr}" onchange="calcRow(${rowCount})"></td><td class="col-age age-months status-cell"></td><td class="col-gen"><select class="gender" onchange="calcRow(${rowCount})"><option value="">Select</option><option value="m" ${gender==='m'?'selected':''}>m</option><option value="f" ${gender==='f'?'selected':''}>f</option></select></td><td class="col-wt"><input type="number" class="weight" step="0.01" value="${weight}" onkeyup="calcRow(${rowCount})" onchange="calcRow(${rowCount})"></td><td class="col-ht"><input type="number" class="height" step="0.1" value="${height}" onkeyup="calcRow(${rowCount})" onchange="calcRow(${rowCount})"></td><td class="col-z waz-z"></td><td class="col-stat waz-stat"></td><td class="col-z haz-z"></td><td class="col-stat haz-stat"></td><td class="col-z whz-z"></td><td class="col-stat whz-stat"></td><td class="col-dbi dbi-cat status-cell"></td>`;
+        let html = `<td class="col-sn">${rowCount}</td><td class="col-fac"><input type="text" class="facility" value="${facility}" onkeyup="calcRow(${rowCount})" onchange="calcRow(${rowCount})"></td><td class="col-child"><input type="text" class="childName" value="${child}" onkeyup="calcRow(${rowCount})" onchange="calcRow(${rowCount})"></td><td class="col-date"><input type="date" class="surveyDate" value="${sDate}" max="${todayStr}" onchange="calcRow(${rowCount})"></td><td class="col-date"><input type="date" class="dob" value="${bDate}" max="${todayStr}" onchange="calcRow(${rowCount})"></td><td class="col-age age-months status-cell"></td><td class="col-gen"><select class="gender" onchange="calcRow(${rowCount})"><option value="">Select</option><option value="m" ${gender==='m'?'selected':''}>m</option><option value="f" ${gender==='f'?'selected':''}>f</option></select></td><td class="col-wt"><input type="number" class="weight" step="0.01" value="${weight}" onkeyup="calcRow(${rowCount})" onchange="calcRow(${rowCount})"></td><td class="col-ht"><input type="number" class="height" step="0.1" value="${height}" onkeyup="calcRow(${rowCount})" onchange="calcRow(${rowCount})"></td><td class="col-z waz-z"></td><td class="col-stat waz-stat"></td><td class="col-z haz-z"></td><td class="col-stat haz-stat"></td><td class="col-z whz-z"></td><td class="col-stat whz-stat"></td><td class="col-dbi dbi-cat status-cell"></td>`;
         tr.innerHTML = html; tbody.appendChild(tr); if(data) calcRow(rowCount, false); 
     }
 
@@ -147899,27 +147925,52 @@
     function calcRow(id, showAlerts = true) {
         const row = document.getElementById(`row-${id}`);
         const sDate = row.querySelector('.surveyDate').value, bDate = row.querySelector('.dob').value, gender = row.querySelector('.gender').value;
+        const childName = row.querySelector('.childName').value.trim(); const facility = row.querySelector('.facility').value.trim();
         let w = parseFloat(row.querySelector('.weight').value), h = parseFloat(row.querySelector('.height').value);
+        
         const outDbi = row.querySelector('.dbi-cat'); outDbi.style.backgroundColor = "transparent"; outDbi.style.color = "black";
         row.querySelector('.age-months').innerText = ""; row.querySelector('.waz-z').innerText = ""; row.querySelector('.waz-stat').innerText = ""; row.querySelector('.haz-z').innerText = ""; row.querySelector('.haz-stat').innerText = ""; row.querySelector('.whz-z').innerText = ""; row.querySelector('.whz-stat').innerText = ""; outDbi.innerText = "";
         row.dataset.ageDays = -1;
+
+        // Mandatory Field Validation for Unique ID Generation
+        if(sDate || bDate || gender || !isNaN(w) || !isNaN(h) || childName || facility) {
+            if (!childName || !facility) {
+                outDbi.innerText = "Missing Name/Facility";
+                outDbi.style.backgroundColor = "#ffeb3b";
+                row.querySelector('.childName').style.backgroundColor = !childName ? "pink" : "";
+                row.querySelector('.facility').style.backgroundColor = !facility ? "pink" : "";
+                return;
+            } else {
+                row.querySelector('.childName').style.backgroundColor = "";
+                row.querySelector('.facility').style.backgroundColor = "";
+            }
+        } else {
+            return; // Empty row
+        }
+
         if (!sDate || !bDate || !gender || isNaN(w) || isNaN(h)) return;
+
         let sDateObj = new Date(sDate), todayObj = new Date(); todayObj.setHours(0,0,0,0);
         if (sDateObj > todayObj || sDateObj < new Date(bDate)) { outDbi.innerText = "Date Error"; outDbi.style.backgroundColor = "#ffeb3b"; return; }
         let ageDays = Math.floor((sDateObj - new Date(bDate)) / 86400000); row.dataset.ageDays = ageDays; row.querySelector('.age-months').innerText = Math.round(ageDays / 30.4375);
         if (ageDays > 1856) { outDbi.innerText = "> 5 years"; outDbi.style.backgroundColor = "#ffcc80"; return; }
         if (h < 45) { outDbi.innerText = "Length < 45cm"; outDbi.style.backgroundColor = "#e0e0e0"; return; }
+
         let waz = 0, haz = 0, whz = 0;
         let wfaData = getLMS((gender === 'm' ? "WFA_BOYS" : "WFA_GIRLS"), ageDays); if(wfaData) waz = computeZ(w, wfaData.L, wfaData.M, wfaData.S) || 0;
         let hfaData = getLMS((gender === 'm' ? "HFA_BOYS" : "HFA_GIRLS"), ageDays); if(hfaData) haz = computeZ(h, hfaData.L, hfaData.M, hfaData.S) || 0;
         let whzData = getLMS((ageDays < 731 ? (gender === 'm' ? "WFL_BOYS" : "WFL_GIRLS") : (gender === 'm' ? "WFH_BOYS" : "WFH_GIRLS")), h); if(whzData) whz = computeZ(w, whzData.L, whzData.M, whzData.S) || 0;
+
         let wazStat = waz < -3 ? "Severely Underweight" : waz < -2 ? "Moderately Underweight" : "Normal";
         let hazStat = haz < -3 ? "Severely Stunted" : haz < -2 ? "Moderately Stunted" : "Normal";
         let whzStat = whz < -3 ? "SAM" : whz < -2 ? "MAM" : whz >= 2 ? "Obese" : "Normal";
+
         row.querySelector('.waz-z').innerText = wfaData ? waz.toFixed(3) : "N/A"; row.querySelector('.waz-stat').innerText = wfaData ? wazStat : "N/A";
         row.querySelector('.haz-z').innerText = hfaData ? haz.toFixed(3) : "N/A"; row.querySelector('.haz-stat').innerText = hfaData ? hazStat : "N/A";
         row.querySelector('.whz-z').innerText = whzData ? whz.toFixed(3) : "N/A"; row.querySelector('.whz-stat').innerText = whzData ? whzStat : "N/A";
+
         if (!wfaData || !hfaData || !whzData) { outDbi.innerText = "Missing Data"; return; }
+
         let dbi = "Implausible data";
         if (wazStat === "Normal" && hazStat === "Normal" && whzStat === "Normal") dbi = "A (Normal)";
         else if (wazStat === "Normal" && hazStat === "Normal" && (whzStat === "MAM" || whzStat === "SAM")) dbi = "B (Only Wasting)";
@@ -147930,8 +147981,10 @@
         else if (wazStat.includes("Underweight") && hazStat === "Normal" && (whzStat === "MAM" || whzStat === "SAM")) dbi = "C (Underweight + Wasting)";
         else if (wazStat.includes("Underweight") && hazStat.includes("Stunted") && whzStat === "Normal") dbi = "E (Underweight + Stunting)";
         else if (wazStat.includes("Underweight") && hazStat.includes("Stunted") && (whzStat === "MAM" || whzStat === "SAM")) dbi = "D (Underweight + Stunting + Wasting)";
+
         outDbi.innerText = dbi;
-        if (dbi.startsWith("A (")) { outDbi.style.backgroundColor = "#4caf50"; outDbi.style.color = "white"; } else if (dbi.startsWith("D (")) { outDbi.style.backgroundColor = "#f44336"; outDbi.style.color = "white"; }
+        if (dbi.startsWith("A (")) { outDbi.style.backgroundColor = "#4caf50"; outDbi.style.color = "white"; } 
+        else if (dbi.startsWith("D (")) { outDbi.style.backgroundColor = "#f44336"; outDbi.style.color = "white"; }
     }
 
     /* --- PFD Application Logic --- */
@@ -147940,17 +147993,24 @@
         document.querySelectorAll('#tableBody tr').forEach(r => {
             let ageDays = parseInt(r.dataset.ageDays || -1), dbi = r.querySelector('.dbi-cat').innerText.trim();
             let facility = r.querySelector('.facility').value.trim(), child = r.querySelector('.childName').value.trim(), gender = r.querySelector('.gender').value, dob = r.querySelector('.dob').value, ageM = r.querySelector('.age-months').innerText;
-            if (ageDays > 180 && ['B', 'C', 'D', 'E', 'G'].some(letter => dbi.startsWith(letter + ' (')) && child !== "") {
+            if (ageDays > 180 && ['B', 'C', 'D', 'E', 'G'].some(letter => dbi.startsWith(letter + ' (')) && child !== "" && facility !== "") {
                 let uniqueId = `${gender?gender.toUpperCase():"X"}-${child.replace(/\s+/g,'').substring(0,3).toUpperCase()}-${facility.replace(/\s+/g,'').substring(0,3).toUpperCase()}-${r.id.split('-')[1]}`;
-                let reportBtnStyle = pfdRecords[uniqueId] ? "display:inline-block;" : "display:none;";
+                
+                let isCompleted = pfdRecords[uniqueId] ? true : false;
+                let btnHtml = isCompleted ? 
+                    `<button disabled style="background:#ccc; color:#666; border:none; padding:6px 12px; border-radius:4px; font-weight:bold; cursor:not-allowed;">Assessment Completed</button>` : 
+                    `<button onclick="openPfdModal('${uniqueId}', '${child.replace(/'/g, "\\'")}', '${gender}', '${dob}', '${ageM}', '${dbi}')" style="background:#9c27b0; color:white; border:none; padding:6px 12px; border-radius:4px; font-weight:bold; cursor:pointer;">Start Assessment</button>`;
+                
+                let reportBtnStyle = isCompleted ? "display:inline-block;" : "display:none;";
+                
                 let tr = document.createElement('tr');
                 tr.innerHTML = `<td>${count++}</td><td style="font-weight:bold; color:#8e24aa;">${uniqueId}</td><td>${facility}</td><td>${child}</td><td>${ageM}</td><td><span style="background-color:${r.querySelector('.dbi-cat').style.backgroundColor}; color:${r.querySelector('.dbi-cat').style.color}; padding:2px 5px; border-radius:3px;">${dbi}</span></td>
-                <td><button onclick="openPfdModal('${uniqueId}', '${child.replace(/'/g, "\\'")}', '${gender}', '${dob}', '${ageM}', '${dbi}')" style="background:#9c27b0; color:white; border:none; padding:6px 12px; border-radius:4px; font-weight:bold; cursor:pointer;">Start Assessment</button></td>
-                <td><button id="report-btn-${uniqueId}" onclick="printReport('${uniqueId}')" style="${reportBtnStyle} background:transparent; border:none; font-size:18px; cursor:pointer;" title="View Report">👁️</button></td>`;
+                <td>${btnHtml}</td>
+                <td><button id="report-btn-${uniqueId}" onclick="openReport('${uniqueId}')" style="${reportBtnStyle} background:transparent; border:none; font-size:18px; cursor:pointer;" title="View Report">👁️</button></td>`;
                 pfdBody.appendChild(tr);
             }
         });
-        if (count === 1) pfdBody.innerHTML = `<tr><td colspan="8" style="padding:25px; color:#555;">No children meet criteria (Age > 180 days AND DBI Category B, C, D, E, or G).</td></tr>`;
+        if (count === 1) pfdBody.innerHTML = `<tr><td colspan="8" style="padding:25px; color:#555;">No children meet criteria (Age > 180 days AND DBI Category B, C, D, E, or G). Both Child Name and Facility must be filled.</td></tr>`;
     }
 
     function openPfdModal(id, name, gen, dob, age, dbi) {
@@ -147963,48 +148023,51 @@
     function closePfdModal() { document.getElementById('pfdModal').style.display = 'none'; document.getElementById('pfdAssessmentForm').reset(); }
 
     function savePfdData() {
-        pfdRecords[currPfdId] = {
-            id: currPfdId, name: currName, gen: currGen, dob: currDob, age: currAgeM, dbi: currDbi,
-            danger: document.getElementById('dangerStatusBox').innerText,
-            medical: "Pending Expert Criteria", nutritional: "Pending Expert Criteria",
-            mch: document.getElementById('mchStatusBox').innerText,
-            phq: document.getElementById('phqStatusBox').innerText,
-            gad: document.getElementById('gadStatusBox').innerText,
-            colorDanger: document.getElementById('dangerStatusBox').className.includes('red') ? 'print-val-red' : 'print-val-green',
-            colorMch: document.getElementById('mchStatusBox').className.includes('red') ? 'print-val-red' : (document.getElementById('mchStatusBox').className.includes('orange') ? 'print-val-orange' : 'print-val-green'),
-            colorPhq: document.getElementById('phqStatusBox').className.includes('red') ? 'print-val-red' : (document.getElementById('phqStatusBox').className.includes('orange') ? 'print-val-orange' : 'print-val-green'),
-            colorGad: document.getElementById('gadStatusBox').className.includes('red') ? 'print-val-red' : (document.getElementById('gadStatusBox').className.includes('orange') ? 'print-val-orange' : 'print-val-green')
-        };
-        
-        let reportBtn = document.getElementById(`report-btn-${currPfdId}`);
-        if(reportBtn) reportBtn.style.display = "inline-block";
-        
-        alert(`Assessment Saved for ${currPfdId}. You can now view the Checkup Report.`);
-        closePfdModal();
+        if(confirm("Are you sure you want to save this assessment? It can only be edited once and will be locked after saving.")) {
+            pfdRecords[currPfdId] = {
+                id: currPfdId, name: currName, gen: currGen, dob: currDob, age: currAgeM, dbi: currDbi,
+                danger: document.getElementById('dangerStatusBox').innerText,
+                medical: "Pending Expert Criteria", nutritional: "Pending Expert Criteria",
+                mch: document.getElementById('mchStatusBox').innerText,
+                phq: document.getElementById('phqStatusBox').innerText,
+                gad: document.getElementById('gadStatusBox').innerText,
+                colorDanger: document.getElementById('dangerStatusBox').className.includes('red') ? 'txt-red' : 'txt-green',
+                colorMch: document.getElementById('mchStatusBox').className.includes('red') ? 'txt-red' : (document.getElementById('mchStatusBox').className.includes('orange') ? 'txt-orange' : 'txt-green'),
+                colorPhq: document.getElementById('phqStatusBox').className.includes('red') ? 'txt-red' : (document.getElementById('phqStatusBox').className.includes('orange') ? 'txt-orange' : 'txt-green'),
+                colorGad: document.getElementById('gadStatusBox').className.includes('red') ? 'txt-red' : (document.getElementById('gadStatusBox').className.includes('orange') ? 'txt-orange' : 'txt-green')
+            };
+            
+            alert(`Assessment Saved for ${currPfdId}. The record is now locked. You can view and download the PDF report.`);
+            closePfdModal();
+            generatePFDList(); // Refresh list to lock button
+        }
     }
 
-    function printReport(id) {
+    function openReport(id) {
         let r = pfdRecords[id];
         if(!r) return;
         let printHtml = `
-            <div class="print-header"><h2>Clinical Summary Report - PFD Assessment</h2></div>
-            <table class="print-table">
-                <tr><th>Child Unique ID</th><td>${r.id}</td></tr>
-                <tr><th>Child Name</th><td>${r.name}</td></tr>
-                <tr><th>Gender</th><td>${r.gen.toUpperCase() === 'M' ? 'Male' : (r.gen.toUpperCase() === 'F' ? 'Female' : 'N/A')}</td></tr>
-                <tr><th>Date of Birth</th><td>${r.dob}</td></tr>
-                <tr><th>Age in Months</th><td>${r.age}</td></tr>
-                <tr><th>DBI Category</th><td>${r.dbi}</td></tr>
-                <tr><th>Danger Sign</th><td class="${r.colorDanger}">${r.danger}</td></tr>
-                <tr><th>Medical Domain Output</th><td class="print-val-neutral">${r.medical}</td></tr>
-                <tr><th>Nutrition Domain Output</th><td class="print-val-neutral">${r.nutritional}</td></tr>
-                <tr><th>MCH Feeding Skills Output</th><td class="${r.colorMch}">${r.mch}</td></tr>
-                <tr><th>Psychosocial (PHQ-9) Output</th><td class="${r.colorPhq}">${r.phq}</td></tr>
-                <tr><th>Psychosocial (GAD-7) Output</th><td class="${r.colorGad}">${r.gad}</td></tr>
-            </table>
+            <div class="report-page">
+                <div class="report-title">Clinical Summary Report - PFD Assessment</div>
+                <div class="report-line"></div>
+                <table class="report-table">
+                    <tr><th>Child Unique ID</th><td>${r.id}</td></tr>
+                    <tr><th>Child Name</th><td>${r.name}</td></tr>
+                    <tr><th>Gender</th><td>${r.gen.toUpperCase() === 'M' ? 'Male' : (r.gen.toUpperCase() === 'F' ? 'Female' : 'N/A')}</td></tr>
+                    <tr><th>Date of Birth</th><td>${r.dob}</td></tr>
+                    <tr><th>Age in Months</th><td>${r.age}</td></tr>
+                    <tr><th>DBI Category</th><td>${r.dbi}</td></tr>
+                    <tr><th>Danger Sign</th><td class="${r.colorDanger}">${r.danger}</td></tr>
+                    <tr><th>Medical Domain Output</th><td class="txt-neutral">${r.medical}</td></tr>
+                    <tr><th>Nutrition Domain Output</th><td class="txt-neutral">${r.nutritional}</td></tr>
+                    <tr><th>MCH Feeding Skills Output</th><td class="${r.colorMch}">${r.mch}</td></tr>
+                    <tr><th>Psychosocial (PHQ-9) Output</th><td class="${r.colorPhq}">${r.phq}</td></tr>
+                    <tr><th>Psychosocial (GAD-7) Output</th><td class="${r.colorGad}">${r.gad}</td></tr>
+                </table>
+            </div>
         `;
-        document.getElementById('printArea').innerHTML = printHtml;
-        window.print(); // Triggers browser's native Save As PDF / Print engine
+        document.getElementById('reportPrintContent').innerHTML = printHtml;
+        document.getElementById('reportModal').style.display = 'flex';
     }
 
     // Scoring Engine
