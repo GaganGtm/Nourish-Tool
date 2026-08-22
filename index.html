@@ -83,10 +83,27 @@
         .form-group label { font-size: 12px; font-weight: bold; color: #333; margin-bottom: 4px; }
         .form-group select, .form-group input[type="text"] { font-size: 13px; padding: 6px; border: 1px solid #aaa; border-radius: 4px; }
         
-        /* Highlight boxes for auto-scores */
-        .score-box { background: #eee; padding: 8px 12px; border-radius: 4px; font-weight: bold; font-size: 13px; text-align: center; border: 1px solid #ccc; margin-top: 10px;}
-        .danger-red { background: #f44336; color: white; border-color: #d32f2f; }
-        .danger-green { background: #4caf50; color: white; border-color: #388e3c; }
+        /* Dynamic Score Boxes */
+        .score-box { background: #eee; padding: 6px 10px; border-radius: 4px; font-weight: bold; font-size: 13px; text-align: center; border: 1px solid #ccc;}
+        .score-red { background: #f44336; color: white; border-color: #d32f2f; }
+        .score-orange { background: #ff9800; color: white; border-color: #f57c00; }
+        .score-green { background: #4caf50; color: white; border-color: #388e3c; }
+
+        /* Print Overlay Styles */
+        #printArea { display: none; }
+        @media print {
+            body * { visibility: hidden; }
+            #printArea, #printArea * { visibility: visible; }
+            #printArea { display: block; position: absolute; left: 0; top: 0; width: 100%; padding: 20px; background: white;}
+            .print-header { text-align: center; color: #4a148c; margin-bottom: 20px; border-bottom: 2px solid #4a148c; padding-bottom: 10px; }
+            .print-table { width: 100%; border-collapse: collapse; margin-bottom: 20px; font-size: 14px;}
+            .print-table th, .print-table td { border: 1px solid #000; padding: 10px; text-align: left; }
+            .print-table th { background-color: #f3e5f5; width: 35%; color: #4a148c;}
+            .print-val-red { font-weight: bold; color: #d32f2f; }
+            .print-val-orange { font-weight: bold; color: #f57c00; }
+            .print-val-green { font-weight: bold; color: #388e3c; }
+            .print-val-neutral { font-weight: bold; color: #333; }
+        }
     </style>
 </head>
 <body>
@@ -159,12 +176,21 @@
 
     <!-- TAB 3: Pediatric Feeding Disorder -->
     <div id="pfd" class="tab-content" style="border-color: #9c27b0; background-color: #f3e5f5;">
-        <div class="summary-table" style="max-width: 1100px; margin: 0 auto; background: white; padding: 20px; border-radius: 8px; border: 1px solid #ccc; box-shadow: 0 2px 4px rgba(0,0,0,0.05);">
+        <div class="summary-table" style="max-width: 1150px; margin: 0 auto; background: white; padding: 20px; border-radius: 8px; border: 1px solid #ccc; box-shadow: 0 2px 4px rgba(0,0,0,0.05);">
             <div class="header-with-btn"><h3 style="margin: 0; color: #9c27b0; font-size: 18px;">Eligible Children for PFD Assessment</h3></div>
             <p style="font-size: 13px; color: #555; margin-bottom: 15px;">Filters children: <strong>Age > 180 days</strong> AND <strong>DBI Category is B, C, D, E, or G</strong>.</p>
             <div class="table-scroll-container" style="max-height: 55vh;">
                 <table id="pfdTable">
-                    <thead><tr><th style="background-color: #9c27b0; color: white;">SN</th><th style="background-color: #8e24aa; color: white;">Unique ID</th><th style="background-color: #9c27b0; color: white;">Doctor / Facility</th><th style="background-color: #8e24aa; color: white;">Name of Child</th><th style="background-color: #9c27b0; color: white;">Age (Months)</th><th style="background-color: #8e24aa; color: white;">DBI Category</th><th style="background-color: #9c27b0; color: white;">Action</th></tr></thead>
+                    <thead><tr>
+                        <th style="background-color: #9c27b0; color: white;">SN</th>
+                        <th style="background-color: #8e24aa; color: white;">Unique ID</th>
+                        <th style="background-color: #9c27b0; color: white;">Doctor / Facility</th>
+                        <th style="background-color: #8e24aa; color: white;">Name of Child</th>
+                        <th style="background-color: #9c27b0; color: white;">Age (Months)</th>
+                        <th style="background-color: #8e24aa; color: white;">DBI Category</th>
+                        <th style="background-color: #9c27b0; color: white;">Action</th>
+                        <th style="background-color: #8e24aa; color: white;">Report</th>
+                    </tr></thead>
                     <tbody id="pfdBody"></tbody>
                 </table>
             </div>
@@ -173,8 +199,21 @@
 
     <!-- TAB 4: User Guide -->
     <div id="guide" class="tab-content">
-        <!-- Kept exactly as requested in prompt, omitted here for brevity to keep code clean, just imagine User Guide text here -->
-        <div class="guide-box"><h2>Standard Operating Procedures (SoP)</h2><p>Please enter data in the DBI Calculator tab.</p></div>
+        <div class="guide-box">
+            <h2>Standard Operating Procedures (SoP)</h2>
+            <p><strong>Step 1:</strong> Open the web tool by clicking the hyperlink shared through WhatsApp/Email. You must enter all data on the tab named <strong>DBI Calculator</strong>.</p>
+            <p><strong>Step 2:</strong> Type <strong>Doctor</strong> or Facility Name.</p>
+            <p><strong>Step 3:</strong> Type the <strong>name</strong> of the child.</p>
+            <p><strong>Step 4:</strong> Enter <strong>Survey date</strong> (MM/DD/YYYY format).</p>
+            <p><strong>Step 5:</strong> Enter <strong>Birth date</strong> (MM/DD/YYYY format).</p>
+            <p><strong>Step 6:</strong> Enter <strong>Gender</strong> (m or f).</p>
+            <p><strong>Step 7:</strong> Enter <strong>Weight</strong> (kg).</p>
+            <p><strong>Step 8:</strong> Enter <strong>Height</strong> (cm) and press Enter or click outside the box.</p>
+        </div>
+        <div class="tech-note">
+            <h3>Technical Note: Calculation Assumptions</h3>
+            <p><strong>DBI Classification Limits:</strong> Uses a Z‑score less than −2 to classify low weight-for-age, low height-for-age, and low weight-for-length.</p>
+        </div>
     </div>
 
     <!-- ================= PFD DIAGNOSTIC MODAL ================= -->
@@ -189,15 +228,22 @@
 
                 <form id="pfdAssessmentForm">
                     
-                    <!-- A. Medical -->
-                    <div class="pfd-section">
-                        <div class="pfd-section-header">
-                            <span>A. Medical Domain & Danger Signs</span>
-                            <span id="dangerStatusBox" class="score-box">🟢 CLEAR: Proceed to 4-Domain Screen</span>
+                    <!-- Danger Signs Section -->
+                    <div class="pfd-section" style="border-color: #f44336;">
+                        <div class="pfd-section-header" style="background-color: #ffcdd2; color: #c62828;">
+                            <span>Danger Signs & Decisions</span>
+                            <span id="dangerStatusBox" class="score-box score-green">🟢 CLEAR: Proceed to 4-Domain Screen</span>
                         </div>
                         <div class="pfd-section-body">
                             <div class="form-group"><label>IMNCI Danger Signs</label><select id="m_imnci" onchange="calcDanger()"><option value="No">No</option><option value="Yes">Yes</option></select></div>
                             <div class="form-group"><label>SAM - Complications</label><select id="m_sam" onchange="calcDanger()"><option value="No">No</option><option value="Yes">Yes</option></select></div>
+                        </div>
+                    </div>
+
+                    <!-- A. Medical -->
+                    <div class="pfd-section">
+                        <div class="pfd-section-header"><span>A. Medical Domain</span></div>
+                        <div class="pfd-section-body">
                             <div class="form-group"><label>Medical: Anatomical</label><select id="m_ana"><option value="No">No</option><option value="Yes">Yes</option></select></div>
                             <div class="form-group"><label>Medical: Neurological</label><select id="m_neuro"><option value="No">No</option><option value="Yes">Yes</option></select></div>
                             <div class="form-group"><label>Medical: Chronic Infections</label><select id="m_inf"><option value="No">No</option><option value="Yes">Yes</option></select></div>
@@ -226,10 +272,9 @@
                     <div class="pfd-section">
                         <div class="pfd-section-header">
                             <span>C. Feeding Skills (MCH-Feeding Scale)</span>
-                            <span id="mchStatusBox" class="score-box">No difficulties</span>
+                            <span id="mchStatusBox" class="score-box score-green">No difficulties (0)</span>
                         </div>
                         <div class="pfd-section-body">
-                            <!-- Dropdowns dynamically built in JS to save space. Score 1 to 7 -->
                             <div class="form-group"><label>1. Mealtime difficulty*</label><select class="mch-score" id="fs_1" onchange="calcMCH()"></select></div>
                             <div class="form-group"><label>2. Worry about eating</label><select class="mch-score" id="fs_2" onchange="calcMCH()"></select></div>
                             <div class="form-group"><label>3. Child's appetite*</label><select class="mch-score" id="fs_3" onchange="calcMCH()"></select></div>
@@ -247,17 +292,13 @@
                         </div>
                     </div>
 
-                    <!-- D. Psychosocial -->
+                    <!-- D. Psychosocial PHQ-9 -->
                     <div class="pfd-section">
                         <div class="pfd-section-header">
-                            <span>D. Psychosocial (PHQ-9 & GAD-7)</span>
-                            <div style="display:flex; gap:10px;">
-                                <span id="phqStatusBox" class="score-box">PHQ: Minimal/None</span>
-                                <span id="gadStatusBox" class="score-box">GAD: Minimal Anxiety</span>
-                            </div>
+                            <span>D. Psychosocial (PHQ-9 Depression)</span>
+                            <span id="phqStatusBox" class="score-box score-green">Minimal or No Depression (0)</span>
                         </div>
                         <div class="pfd-section-body">
-                            <div class="pfd-full-width" style="font-weight:bold; color:#4a148c; border-bottom:1px solid #ccc; padding-bottom:5px;">PHQ-9 (Depression)</div>
                             <div class="form-group"><label>Little interest/pleasure</label><select class="phq-score" onchange="calcPsych()"></select></div>
                             <div class="form-group"><label>Feeling down/hopeless</label><select class="phq-score" onchange="calcPsych()"></select></div>
                             <div class="form-group"><label>Sleep trouble</label><select class="phq-score" onchange="calcPsych()"></select></div>
@@ -267,8 +308,16 @@
                             <div class="form-group"><label>Trouble concentrating</label><select class="phq-score" onchange="calcPsych()"></select></div>
                             <div class="form-group"><label>Moving/speaking slowly or fidgety</label><select class="phq-score" onchange="calcPsych()"></select></div>
                             <div class="form-group"><label>Thoughts of self-harm</label><select class="phq-score" onchange="calcPsych()"></select></div>
-                            
-                            <div class="pfd-full-width" style="font-weight:bold; color:#4a148c; border-bottom:1px solid #ccc; padding-bottom:5px; margin-top:10px;">GAD-7 (Anxiety)</div>
+                        </div>
+                    </div>
+
+                    <!-- E. Psychosocial GAD-7 -->
+                    <div class="pfd-section">
+                        <div class="pfd-section-header">
+                            <span>E. Psychosocial (GAD-7 Anxiety)</span>
+                            <span id="gadStatusBox" class="score-box score-green">Minimal anxiety (0)</span>
+                        </div>
+                        <div class="pfd-section-body">
                             <div class="form-group"><label>Nervous/anxious/on edge</label><select class="gad-score" onchange="calcPsych()"></select></div>
                             <div class="form-group"><label>Cannot stop worrying</label><select class="gad-score" onchange="calcPsych()"></select></div>
                             <div class="form-group"><label>Worrying too much</label><select class="gad-score" onchange="calcPsych()"></select></div>
@@ -282,10 +331,13 @@
             </div>
             <div class="modal-footer">
                 <button onclick="closePfdModal()" style="padding: 8px 16px; border: 1px solid #ccc; background: white; border-radius: 4px; cursor: pointer; margin-right: 10px;">Cancel</button>
-                <button onclick="generatePfdReport()" style="padding: 8px 16px; border: none; background: #9c27b0; color: white; border-radius: 4px; font-weight: bold; cursor: pointer;">Save & Generate Report</button>
+                <button onclick="savePfdData()" style="padding: 8px 16px; border: none; background: #9c27b0; color: white; border-radius: 4px; font-weight: bold; cursor: pointer;">Save Assessment</button>
             </div>
         </div>
     </div>
+
+    <!-- Hidden Printable Report Overlay -->
+    <div id="printArea"></div>
 
 <script>
     document.addEventListener('contextmenu', event => event.preventDefault());
@@ -147792,14 +147844,15 @@
 
     let rowCount = 0;
     let chartInstance = null;
+    let pfdRecords = {}; // Global store for PFD Assessments
 
-    // Build Form Options Dynamically
+    // Dynamic Variables for currently open Modal
+    let currPfdId = "", currName = "", currGen = "", currDob = "", currAgeM = "", currDbi = "";
+
     window.onload = () => { 
         for(let i=0; i<10; i++) addRow(); 
-        
         let mchOptions = `<option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option><option value="6">6</option><option value="7">7</option>`;
         document.querySelectorAll('.mch-score').forEach(el => el.innerHTML = mchOptions);
-
         let psychOptions = `<option value="0">0 - Not at all</option><option value="1">1 - Several days</option><option value="2">2 - More than half the days</option><option value="3">3 - Nearly every day</option>`;
         document.querySelectorAll('.phq-score, .gad-score').forEach(el => el.innerHTML = psychOptions);
     };
@@ -147807,44 +147860,25 @@
     function switchTab(tabId, themeColor, bgColor) {
         document.querySelectorAll('.tab-content').forEach(tab => { tab.classList.remove('active'); tab.style.borderColor = '#4285f4'; tab.style.backgroundColor = 'white'; });
         document.querySelectorAll('.tab-btn').forEach(btn => { btn.classList.remove('active'); btn.style.borderTop = 'none'; btn.style.color = 'black'; btn.style.backgroundColor = '#e0e0e0'; });
-        
-        let activeTab = document.getElementById(tabId);
-        activeTab.classList.add('active'); activeTab.style.borderColor = themeColor; activeTab.style.backgroundColor = bgColor;
-        let activeBtn = document.getElementById('btn-' + tabId);
-        activeBtn.classList.add('active'); activeBtn.style.borderTop = `4px solid ${themeColor}`; activeBtn.style.color = themeColor; activeBtn.style.backgroundColor = bgColor;
-        
+        let activeTab = document.getElementById(tabId); activeTab.classList.add('active'); activeTab.style.borderColor = themeColor; activeTab.style.backgroundColor = bgColor;
+        let activeBtn = document.getElementById('btn-' + tabId); activeBtn.classList.add('active'); activeBtn.style.borderTop = `4px solid ${themeColor}`; activeBtn.style.color = themeColor; activeBtn.style.backgroundColor = bgColor;
         if(tabId === 'summary') generateSummary();
         if(tabId === 'pfd') generatePFDList();
     }
 
     /* --- DBI Calculator Logic --- */
     function addRow(data = null) {
-        rowCount++;
-        const tbody = document.getElementById('tableBody');
-        const tr = document.createElement('tr');
-        tr.id = `row-${rowCount}`;
-        tr.dataset.ageDays = -1;
-
+        rowCount++; const tbody = document.getElementById('tableBody'); const tr = document.createElement('tr'); tr.id = `row-${rowCount}`; tr.dataset.ageDays = -1;
         let facility = data ? data[0] : ""; let child = data ? data[1] : ""; let sDate = data ? formatExcelDate(data[2]) : ""; let bDate = data ? formatExcelDate(data[3]) : ""; let gender = data ? data[4].toLowerCase().trim() : ""; let weight = data ? data[5] : ""; let height = data ? data[6] : "";
         let todayStr = new Date().toISOString().split('T')[0];
-
-        let html = `<td class="col-sn">${rowCount}</td>`;
-        html += `<td class="col-fac"><input type="text" class="facility" value="${facility}"></td><td class="col-child"><input type="text" class="childName" value="${child}"></td>`;
-        html += `<td class="col-date"><input type="date" class="surveyDate" value="${sDate}" max="${todayStr}" onchange="calcRow(${rowCount})"></td><td class="col-date"><input type="date" class="dob" value="${bDate}" max="${todayStr}" onchange="calcRow(${rowCount})"></td>`;
-        html += `<td class="col-age age-months status-cell"></td><td class="col-gen"><select class="gender" onchange="calcRow(${rowCount})"><option value="">Select</option><option value="m" ${gender==='m'?'selected':''}>m</option><option value="f" ${gender==='f'?'selected':''}>f</option></select></td>`;
-        html += `<td class="col-wt"><input type="number" class="weight" step="0.01" value="${weight}" onkeyup="calcRow(${rowCount})" onchange="calcRow(${rowCount})"></td><td class="col-ht"><input type="number" class="height" step="0.1" value="${height}" onkeyup="calcRow(${rowCount})" onchange="calcRow(${rowCount})"></td>`;
-        html += `<td class="col-z waz-z"></td><td class="col-stat waz-stat"></td><td class="col-z haz-z"></td><td class="col-stat haz-stat"></td><td class="col-z whz-z"></td><td class="col-stat whz-stat"></td><td class="col-dbi dbi-cat status-cell"></td>`;
-        
-        tr.innerHTML = html; tbody.appendChild(tr);
-        if(data) calcRow(rowCount, false); 
+        let html = `<td class="col-sn">${rowCount}</td><td class="col-fac"><input type="text" class="facility" value="${facility}"></td><td class="col-child"><input type="text" class="childName" value="${child}"></td><td class="col-date"><input type="date" class="surveyDate" value="${sDate}" max="${todayStr}" onchange="calcRow(${rowCount})"></td><td class="col-date"><input type="date" class="dob" value="${bDate}" max="${todayStr}" onchange="calcRow(${rowCount})"></td><td class="col-age age-months status-cell"></td><td class="col-gen"><select class="gender" onchange="calcRow(${rowCount})"><option value="">Select</option><option value="m" ${gender==='m'?'selected':''}>m</option><option value="f" ${gender==='f'?'selected':''}>f</option></select></td><td class="col-wt"><input type="number" class="weight" step="0.01" value="${weight}" onkeyup="calcRow(${rowCount})" onchange="calcRow(${rowCount})"></td><td class="col-ht"><input type="number" class="height" step="0.1" value="${height}" onkeyup="calcRow(${rowCount})" onchange="calcRow(${rowCount})"></td><td class="col-z waz-z"></td><td class="col-stat waz-stat"></td><td class="col-z haz-z"></td><td class="col-stat haz-stat"></td><td class="col-z whz-z"></td><td class="col-stat whz-stat"></td><td class="col-dbi dbi-cat status-cell"></td>`;
+        tr.innerHTML = html; tbody.appendChild(tr); if(data) calcRow(rowCount, false); 
     }
 
     function formatExcelDate(dateStr) { if(!dateStr) return ""; let d = new Date(dateStr); if(isNaN(d)) return ""; return d.toISOString().split('T')[0]; }
 
     function processBulkPaste() {
-        let text = document.getElementById('bulkPasteArea').value.trim(); if(!text) return;
-        let lines = text.split('\n');
-        if (lines.length > 5000) { alert("Max 5,000 rows."); return; }
+        let text = document.getElementById('bulkPasteArea').value.trim(); if(!text) return; let lines = text.split('\n'); if (lines.length > 5000) { alert("Max 5,000 rows."); return; }
         if (rowCount === 10 && !document.querySelector('.childName').value) { document.getElementById('tableBody').innerHTML = ""; rowCount = 0; }
         lines.forEach(line => { let cols = line.split('\t'); if(cols.length >= 7) addRow(cols); });
         document.getElementById('bulkPasteArea').value = ""; alert(`Imported ${lines.length} rows.`);
@@ -147854,54 +147888,38 @@
         if (!l || !m || !s || !y) return null;
         let z = (Math.pow(y / m, l) - 1) / (l * s);
         let w3n = m * Math.pow(1 + l * s * -3, 1/l), w2n = m * Math.pow(1 + l * s * -2, 1/l), w3p = m * Math.pow(1 + l * s * 3, 1/l), w2p = m * Math.pow(1 + l * s * 2, 1/l);
-        if (z < -3) return -3 + ((y - w3n) / (w2n - w3n));
-        if (z > 3) return 3 + ((y - w3p) / (w3p - w2p));
-        return z;
+        if (z < -3) return -3 + ((y - w3n) / (w2n - w3n)); if (z > 3) return 3 + ((y - w3p) / (w3p - w2p)); return z;
     }
 
     function getLMS(table, searchVal) {
-        let targetArray = eval(table);
-        if (!targetArray || targetArray.length === 0) return null;
-        return targetArray.find(row => {
-            let rowKey = row.Day ?? row.Month ?? row.Age ?? row.day ?? row.month ?? row.age ?? row.Length ?? row.Height ?? Object.values(row)[0]; 
-            return (table.includes("WFH") || table.includes("WFL")) ? parseFloat(rowKey).toFixed(1) === parseFloat(searchVal).toFixed(1) : Math.round(parseFloat(rowKey)) === Math.round(searchVal);
-        });
+        let targetArray = eval(table); if (!targetArray || targetArray.length === 0) return null;
+        return targetArray.find(row => { let rowKey = row.Day ?? row.Month ?? row.Age ?? row.day ?? row.month ?? row.age ?? row.Length ?? row.Height ?? Object.values(row)[0]; return (table.includes("WFH") || table.includes("WFL")) ? parseFloat(rowKey).toFixed(1) === parseFloat(searchVal).toFixed(1) : Math.round(parseFloat(rowKey)) === Math.round(searchVal); });
     }
 
     function calcRow(id, showAlerts = true) {
         const row = document.getElementById(`row-${id}`);
         const sDate = row.querySelector('.surveyDate').value, bDate = row.querySelector('.dob').value, gender = row.querySelector('.gender').value;
         let w = parseFloat(row.querySelector('.weight').value), h = parseFloat(row.querySelector('.height').value);
-        
         const outDbi = row.querySelector('.dbi-cat'); outDbi.style.backgroundColor = "transparent"; outDbi.style.color = "black";
         row.querySelector('.age-months').innerText = ""; row.querySelector('.waz-z').innerText = ""; row.querySelector('.waz-stat').innerText = ""; row.querySelector('.haz-z').innerText = ""; row.querySelector('.haz-stat').innerText = ""; row.querySelector('.whz-z').innerText = ""; row.querySelector('.whz-stat').innerText = ""; outDbi.innerText = "";
         row.dataset.ageDays = -1;
-
         if (!sDate || !bDate || !gender || isNaN(w) || isNaN(h)) return;
-
         let sDateObj = new Date(sDate), todayObj = new Date(); todayObj.setHours(0,0,0,0);
         if (sDateObj > todayObj || sDateObj < new Date(bDate)) { outDbi.innerText = "Date Error"; outDbi.style.backgroundColor = "#ffeb3b"; return; }
-
-        let ageDays = Math.floor((sDateObj - new Date(bDate)) / 86400000);
-        row.dataset.ageDays = ageDays; row.querySelector('.age-months').innerText = Math.round(ageDays / 30.4375);
+        let ageDays = Math.floor((sDateObj - new Date(bDate)) / 86400000); row.dataset.ageDays = ageDays; row.querySelector('.age-months').innerText = Math.round(ageDays / 30.4375);
         if (ageDays > 1856) { outDbi.innerText = "> 5 years"; outDbi.style.backgroundColor = "#ffcc80"; return; }
         if (h < 45) { outDbi.innerText = "Length < 45cm"; outDbi.style.backgroundColor = "#e0e0e0"; return; }
-
         let waz = 0, haz = 0, whz = 0;
         let wfaData = getLMS((gender === 'm' ? "WFA_BOYS" : "WFA_GIRLS"), ageDays); if(wfaData) waz = computeZ(w, wfaData.L, wfaData.M, wfaData.S) || 0;
         let hfaData = getLMS((gender === 'm' ? "HFA_BOYS" : "HFA_GIRLS"), ageDays); if(hfaData) haz = computeZ(h, hfaData.L, hfaData.M, hfaData.S) || 0;
         let whzData = getLMS((ageDays < 731 ? (gender === 'm' ? "WFL_BOYS" : "WFL_GIRLS") : (gender === 'm' ? "WFH_BOYS" : "WFH_GIRLS")), h); if(whzData) whz = computeZ(w, whzData.L, whzData.M, whzData.S) || 0;
-
         let wazStat = waz < -3 ? "Severely Underweight" : waz < -2 ? "Moderately Underweight" : "Normal";
         let hazStat = haz < -3 ? "Severely Stunted" : haz < -2 ? "Moderately Stunted" : "Normal";
         let whzStat = whz < -3 ? "SAM" : whz < -2 ? "MAM" : whz >= 2 ? "Obese" : "Normal";
-
         row.querySelector('.waz-z').innerText = wfaData ? waz.toFixed(3) : "N/A"; row.querySelector('.waz-stat').innerText = wfaData ? wazStat : "N/A";
         row.querySelector('.haz-z').innerText = hfaData ? haz.toFixed(3) : "N/A"; row.querySelector('.haz-stat').innerText = hfaData ? hazStat : "N/A";
         row.querySelector('.whz-z').innerText = whzData ? whz.toFixed(3) : "N/A"; row.querySelector('.whz-stat').innerText = whzData ? whzStat : "N/A";
-
         if (!wfaData || !hfaData || !whzData) { outDbi.innerText = "Missing Data"; return; }
-
         let dbi = "Implausible data";
         if (wazStat === "Normal" && hazStat === "Normal" && whzStat === "Normal") dbi = "A (Normal)";
         else if (wazStat === "Normal" && hazStat === "Normal" && (whzStat === "MAM" || whzStat === "SAM")) dbi = "B (Only Wasting)";
@@ -147912,84 +147930,135 @@
         else if (wazStat.includes("Underweight") && hazStat === "Normal" && (whzStat === "MAM" || whzStat === "SAM")) dbi = "C (Underweight + Wasting)";
         else if (wazStat.includes("Underweight") && hazStat.includes("Stunted") && whzStat === "Normal") dbi = "E (Underweight + Stunting)";
         else if (wazStat.includes("Underweight") && hazStat.includes("Stunted") && (whzStat === "MAM" || whzStat === "SAM")) dbi = "D (Underweight + Stunting + Wasting)";
-
         outDbi.innerText = dbi;
-        if (dbi.startsWith("A (")) { outDbi.style.backgroundColor = "#4caf50"; outDbi.style.color = "white"; } 
-        else if (dbi.startsWith("D (")) { outDbi.style.backgroundColor = "#f44336"; outDbi.style.color = "white"; }
+        if (dbi.startsWith("A (")) { outDbi.style.backgroundColor = "#4caf50"; outDbi.style.color = "white"; } else if (dbi.startsWith("D (")) { outDbi.style.backgroundColor = "#f44336"; outDbi.style.color = "white"; }
     }
 
     /* --- PFD Application Logic --- */
     function generatePFDList() {
-        const pfdBody = document.getElementById('pfdBody'); pfdBody.innerHTML = '';
-        let count = 1;
+        const pfdBody = document.getElementById('pfdBody'); pfdBody.innerHTML = ''; let count = 1;
         document.querySelectorAll('#tableBody tr').forEach(r => {
             let ageDays = parseInt(r.dataset.ageDays || -1), dbi = r.querySelector('.dbi-cat').innerText.trim();
-            let facility = r.querySelector('.facility').value.trim(), child = r.querySelector('.childName').value.trim(), gender = r.querySelector('.gender').value, ageM = r.querySelector('.age-months').innerText;
+            let facility = r.querySelector('.facility').value.trim(), child = r.querySelector('.childName').value.trim(), gender = r.querySelector('.gender').value, dob = r.querySelector('.dob').value, ageM = r.querySelector('.age-months').innerText;
             if (ageDays > 180 && ['B', 'C', 'D', 'E', 'G'].some(letter => dbi.startsWith(letter + ' (')) && child !== "") {
                 let uniqueId = `${gender?gender.toUpperCase():"X"}-${child.replace(/\s+/g,'').substring(0,3).toUpperCase()}-${facility.replace(/\s+/g,'').substring(0,3).toUpperCase()}-${r.id.split('-')[1]}`;
+                let reportBtnStyle = pfdRecords[uniqueId] ? "display:inline-block;" : "display:none;";
                 let tr = document.createElement('tr');
-                tr.innerHTML = `<td>${count++}</td><td style="font-weight:bold; color:#8e24aa;">${uniqueId}</td><td>${facility}</td><td>${child}</td><td>${ageM}</td><td><span style="background-color:${r.querySelector('.dbi-cat').style.backgroundColor}; color:${r.querySelector('.dbi-cat').style.color}; padding:2px 5px; border-radius:3px;">${dbi}</span></td><td><button onclick="openPfdModal('${uniqueId}', '${child.replace(/'/g, "\\'")}', '${ageM}', '${dbi}')" style="background:#9c27b0; color:white; border:none; padding:6px 12px; border-radius:4px; font-weight:bold; cursor:pointer;">Start PFD Assessment</button></td>`;
+                tr.innerHTML = `<td>${count++}</td><td style="font-weight:bold; color:#8e24aa;">${uniqueId}</td><td>${facility}</td><td>${child}</td><td>${ageM}</td><td><span style="background-color:${r.querySelector('.dbi-cat').style.backgroundColor}; color:${r.querySelector('.dbi-cat').style.color}; padding:2px 5px; border-radius:3px;">${dbi}</span></td>
+                <td><button onclick="openPfdModal('${uniqueId}', '${child.replace(/'/g, "\\'")}', '${gender}', '${dob}', '${ageM}', '${dbi}')" style="background:#9c27b0; color:white; border:none; padding:6px 12px; border-radius:4px; font-weight:bold; cursor:pointer;">Start Assessment</button></td>
+                <td><button id="report-btn-${uniqueId}" onclick="printReport('${uniqueId}')" style="${reportBtnStyle} background:transparent; border:none; font-size:18px; cursor:pointer;" title="View Report">👁️</button></td>`;
                 pfdBody.appendChild(tr);
             }
         });
-        if (count === 1) pfdBody.innerHTML = `<tr><td colspan="7" style="padding:25px; color:#555;">No children meet criteria (Age > 180 days AND DBI Category B, C, D, E, or G).</td></tr>`;
+        if (count === 1) pfdBody.innerHTML = `<tr><td colspan="8" style="padding:25px; color:#555;">No children meet criteria (Age > 180 days AND DBI Category B, C, D, E, or G).</td></tr>`;
     }
 
-    function openPfdModal(id, name, age, dbi) {
+    function openPfdModal(id, name, gen, dob, age, dbi) {
+        currPfdId = id; currName = name; currGen = gen; currDob = dob; currAgeM = age; currDbi = dbi;
         document.getElementById('modalChildSnapshot').innerHTML = `<div><strong>Unique ID:</strong> ${id}</div><div><strong>Child Name:</strong> ${name}</div><div><strong>Age (Months):</strong> ${age}</div><div><strong>DBI Category:</strong> ${dbi}</div>`;
         document.getElementById('pfdModal').style.display = 'flex';
         calcDanger(); calcMCH(); calcPsych();
     }
+    
     function closePfdModal() { document.getElementById('pfdModal').style.display = 'none'; document.getElementById('pfdAssessmentForm').reset(); }
-    function generatePfdReport() { alert("Report generated successfully!"); closePfdModal(); }
+
+    function savePfdData() {
+        pfdRecords[currPfdId] = {
+            id: currPfdId, name: currName, gen: currGen, dob: currDob, age: currAgeM, dbi: currDbi,
+            danger: document.getElementById('dangerStatusBox').innerText,
+            medical: "Pending Expert Criteria", nutritional: "Pending Expert Criteria",
+            mch: document.getElementById('mchStatusBox').innerText,
+            phq: document.getElementById('phqStatusBox').innerText,
+            gad: document.getElementById('gadStatusBox').innerText,
+            colorDanger: document.getElementById('dangerStatusBox').className.includes('red') ? 'print-val-red' : 'print-val-green',
+            colorMch: document.getElementById('mchStatusBox').className.includes('red') ? 'print-val-red' : (document.getElementById('mchStatusBox').className.includes('orange') ? 'print-val-orange' : 'print-val-green'),
+            colorPhq: document.getElementById('phqStatusBox').className.includes('red') ? 'print-val-red' : (document.getElementById('phqStatusBox').className.includes('orange') ? 'print-val-orange' : 'print-val-green'),
+            colorGad: document.getElementById('gadStatusBox').className.includes('red') ? 'print-val-red' : (document.getElementById('gadStatusBox').className.includes('orange') ? 'print-val-orange' : 'print-val-green')
+        };
+        
+        let reportBtn = document.getElementById(`report-btn-${currPfdId}`);
+        if(reportBtn) reportBtn.style.display = "inline-block";
+        
+        alert(`Assessment Saved for ${currPfdId}. You can now view the Checkup Report.`);
+        closePfdModal();
+    }
+
+    function printReport(id) {
+        let r = pfdRecords[id];
+        if(!r) return;
+        let printHtml = `
+            <div class="print-header"><h2>Clinical Summary Report - PFD Assessment</h2></div>
+            <table class="print-table">
+                <tr><th>Child Unique ID</th><td>${r.id}</td></tr>
+                <tr><th>Child Name</th><td>${r.name}</td></tr>
+                <tr><th>Gender</th><td>${r.gen.toUpperCase() === 'M' ? 'Male' : (r.gen.toUpperCase() === 'F' ? 'Female' : 'N/A')}</td></tr>
+                <tr><th>Date of Birth</th><td>${r.dob}</td></tr>
+                <tr><th>Age in Months</th><td>${r.age}</td></tr>
+                <tr><th>DBI Category</th><td>${r.dbi}</td></tr>
+                <tr><th>Danger Sign</th><td class="${r.colorDanger}">${r.danger}</td></tr>
+                <tr><th>Medical Domain Output</th><td class="print-val-neutral">${r.medical}</td></tr>
+                <tr><th>Nutrition Domain Output</th><td class="print-val-neutral">${r.nutritional}</td></tr>
+                <tr><th>MCH Feeding Skills Output</th><td class="${r.colorMch}">${r.mch}</td></tr>
+                <tr><th>Psychosocial (PHQ-9) Output</th><td class="${r.colorPhq}">${r.phq}</td></tr>
+                <tr><th>Psychosocial (GAD-7) Output</th><td class="${r.colorGad}">${r.gad}</td></tr>
+            </table>
+        `;
+        document.getElementById('printArea').innerHTML = printHtml;
+        window.print(); // Triggers browser's native Save As PDF / Print engine
+    }
 
     // Scoring Engine
     function calcDanger() {
-        let imnci = document.getElementById('m_imnci').value;
-        let sam = document.getElementById('m_sam').value;
-        let box = document.getElementById('dangerStatusBox');
-        if(imnci === 'Yes' || sam === 'Yes') { box.innerText = "🔴 EMERGENCY: Stabilize & Refer"; box.className = "score-box danger-red"; } 
-        else { box.innerText = "🟢 CLEAR: Proceed to 4-Domain Screen"; box.className = "score-box danger-green"; }
+        let imnci = document.getElementById('m_imnci').value; let sam = document.getElementById('m_sam').value; let box = document.getElementById('dangerStatusBox');
+        if(imnci === 'Yes' || sam === 'Yes') { box.innerText = "🔴 EMERGENCY: Stabilize & Refer"; box.className = "score-box score-red"; } 
+        else { box.innerText = "🟢 CLEAR: Proceed to 4-Domain Screen"; box.className = "score-box score-green"; }
     }
 
     const tScoreMap = {14:35,15:36,16:37,17:38,18:39,19:39,20:40,21:41,22:42,23:43,24:43,25:44,26:45,27:46,28:46,29:47,30:48,31:49,32:50,33:50,34:51,35:52,36:53,37:54,38:54,39:55,40:56,41:57,42:57,43:58,44:59,45:60,46:61,47:61,48:62,49:63,50:64,51:65,52:65,53:66,54:67,55:68,56:68,57:69,58:70,59:71,60:72,61:72,62:73,63:74,64:75,65:76,66:76,67:77,68:78,69:79,70:80,71:80,72:81,73:82,74:83,75:83,76:84,77:85,78:86,79:87,80:87,81:88,82:89,83:90,84:91,85:91,86:92,87:93,88:94,89:94,90:95,91:96,92:97,93:98,94:98,95:99,96:100,97:101,98:102};
 
     function calcMCH() {
-        let raw = 0;
-        let reverseItems = [1, 3, 4, 8, 10, 12, 13];
-        for(let i=1; i<=14; i++) {
-            let val = parseInt(document.getElementById('fs_'+i).value) || 1;
-            if (reverseItems.includes(i)) val = 8 - val; // Reverse logic from Excel Formula
-            raw += val;
-        }
-        let tScore = tScoreMap[raw] || 0;
-        let box = document.getElementById('mchStatusBox');
-        let text = "No difficulties"; let cls = "score-box";
-        if(tScore > 70) { text = "Severe Difficulties"; cls = "score-box danger-red"; }
-        else if(tScore >= 66) { text = "Moderate Difficulties"; cls = "score-box"; box.style.background = "#ff9800"; box.style.color="white";}
-        else if(tScore >= 61) { text = "Mild Difficulties"; cls = "score-box"; box.style.background = "#ffeb3b"; }
-        else { cls = "score-box danger-green"; }
+        let raw = 0; let reverseItems = [1, 3, 4, 8, 10, 12, 13];
+        for(let i=1; i<=14; i++) { let val = parseInt(document.getElementById('fs_'+i).value) || 1; if (reverseItems.includes(i)) val = 8 - val; raw += val; }
+        let tScore = tScoreMap[raw] || 0; let box = document.getElementById('mchStatusBox'); let text = "No difficulties"; let cls = "score-box";
+        if(tScore > 70) { text = "Severe Difficulties"; cls = "score-box score-red"; }
+        else if(tScore >= 66) { text = "Moderate Difficulties"; cls = "score-box score-orange";}
+        else if(tScore >= 61) { text = "Mild Difficulties"; cls = "score-box score-orange"; }
+        else { cls = "score-box score-green"; }
         box.innerText = `${text} (${tScore})`; box.className = cls;
     }
 
     function calcPsych() {
         let phqTotal = 0; document.querySelectorAll('.phq-score').forEach(el => phqTotal += parseInt(el.value) || 0);
         let phqBox = document.getElementById('phqStatusBox');
-        if(phqTotal >= 20) { phqBox.innerText = `Severe Depression (${phqTotal})`; phqBox.className = "score-box danger-red"; }
-        else if(phqTotal >= 15) { phqBox.innerText = `Moderately Severe Depression (${phqTotal})`; phqBox.className = "score-box danger-red"; }
-        else if(phqTotal >= 10) { phqBox.innerText = `Moderate Depression (${phqTotal})`; phqBox.className = "score-box"; phqBox.style.background = "#ff9800"; phqBox.style.color="white";}
-        else if(phqTotal >= 5) { phqBox.innerText = `Mild Depression (${phqTotal})`; phqBox.className = "score-box"; phqBox.style.background = "#ffeb3b"; }
-        else { phqBox.innerText = `Minimal/None (${phqTotal})`; phqBox.className = "score-box danger-green"; }
+        if(phqTotal >= 20) { phqBox.innerText = `Severe Depression (${phqTotal})`; phqBox.className = "score-box score-red"; }
+        else if(phqTotal >= 15) { phqBox.innerText = `Moderately Severe Depression (${phqTotal})`; phqBox.className = "score-box score-orange"; }
+        else if(phqTotal >= 10) { phqBox.innerText = `Moderate Depression (${phqTotal})`; phqBox.className = "score-box score-orange"; }
+        else if(phqTotal >= 5) { phqBox.innerText = `Mild Depression (${phqTotal})`; phqBox.className = "score-box score-orange"; }
+        else { phqBox.innerText = `Minimal or No Depression (${phqTotal})`; phqBox.className = "score-box score-green"; }
 
         let gadTotal = 0; document.querySelectorAll('.gad-score').forEach(el => gadTotal += parseInt(el.value) || 0);
         let gadBox = document.getElementById('gadStatusBox');
-        if(gadTotal >= 15) { gadBox.innerText = `Severe Anxiety (${gadTotal})`; gadBox.className = "score-box danger-red"; }
-        else if(gadTotal >= 10) { gadBox.innerText = `Moderate Anxiety (${gadTotal})`; gadBox.className = "score-box"; gadBox.style.background = "#ff9800"; gadBox.style.color="white";}
-        else if(gadTotal >= 5) { gadBox.innerText = `Mild Anxiety (${gadTotal})`; gadBox.className = "score-box"; gadBox.style.background = "#ffeb3b"; }
-        else { gadBox.innerText = `Minimal Anxiety (${gadTotal})`; gadBox.className = "score-box danger-green"; }
+        if(gadTotal >= 15) { gadBox.innerText = `Severe anxiety (${gadTotal})`; gadBox.className = "score-box score-red"; }
+        else if(gadTotal >= 10) { gadBox.innerText = `Moderate anxiety (${gadTotal})`; gadBox.className = "score-box score-orange";}
+        else if(gadTotal >= 5) { gadBox.innerText = `Mild anxiety (${gadTotal})`; gadBox.className = "score-box score-orange"; }
+        else { gadBox.innerText = `Minimal anxiety (${gadTotal})`; gadBox.className = "score-box score-green"; }
     }
 
-    /* --- Extra functions like export data are kept hidden here for brevity but function normally --- */
+    /* Summary Dashboard Logic */
+    function generateSummary() {
+        const rows = document.querySelectorAll('.dbi-cat'); let counts = { A:0, B:0, C:0, D:0, E:0, F:0, G:0, H:0, I:0, Over5:0, Implausible:0, Error:0 }; let validTotal = 0; let grandTotal = 0;
+        rows.forEach(r => {
+            let val = r.innerText.trim(); if (!val) return; 
+            if(val.startsWith("A (")) { counts.A++; validTotal++; grandTotal++; } else if(val.startsWith("B (")) { counts.B++; validTotal++; grandTotal++; } else if(val.startsWith("C (")) { counts.C++; validTotal++; grandTotal++; } else if(val.startsWith("D (")) { counts.D++; validTotal++; grandTotal++; } else if(val.startsWith("E (")) { counts.E++; validTotal++; grandTotal++; } else if(val.startsWith("F (")) { counts.F++; validTotal++; grandTotal++; } else if(val.startsWith("G (")) { counts.G++; validTotal++; grandTotal++; } else if(val.startsWith("H (")) { counts.H++; validTotal++; grandTotal++; } else if(val.startsWith("I (")) { counts.I++; validTotal++; grandTotal++; } else if(val.includes("> 5 years")) { counts.Over5++; grandTotal++; } else if(val.includes("Implausible")) { counts.Implausible++; grandTotal++; } else { counts.Error++; grandTotal++; } 
+        });
+        const categories = [{ id: "A", name: "Normal", bg: "#4caf50" }, { id: "B", name: "Only Wasting", bg: "#8bc34a" }, { id: "C", name: "Underweight + Wasting", bg: "#ff9800" }, { id: "D", name: "Underweight + Stunting + Wasting", bg: "#f44336" }, { id: "E", name: "Underweight + Stunting", bg: "#ffeb3b" }, { id: "F", name: "Only Stunting", bg: "#00bcd4" }, { id: "G", name: "Only Underweight", bg: "#03a9f4" }, { id: "H", name: "Stunting + Obesity", bg: "#9c27b0" }, { id: "I", name: "Only Obesity", bg: "#e91e63" }];
+        let html = ''; let chartData = []; let chartColors = []; let chartLabels = []; let totalAtoI = 0;
+        categories.forEach(cat => { let count = counts[cat.id]; totalAtoI += count; let perc = validTotal > 0 ? ((count / validTotal) * 100).toFixed(1) : "0.0"; html += `<tr><td style="text-align:center; font-weight:bold;">${cat.id}</td><td style="text-align:left;">${cat.name}</td><td style="text-align:center;">${count}</td><td style="text-align:center;">${perc}%</td></tr>`; if (count > 0) { chartData.push(count); chartColors.push(cat.bg); chartLabels.push(`${cat.name} (${perc}%)`); } });
+        document.getElementById('summaryBody').innerHTML = html + `<tr style="background:#e8f5e9; color:black; font-weight:bold"><td colspan="2" style="text-align:right;">Total (A to I)</td><td style="text-align:center;">${totalAtoI}</td><td style="text-align:center;">${validTotal>0?((totalAtoI/validTotal)*100).toFixed(1):"0.0"}%</td></tr>`;
+        document.getElementById('secondarySummaryBody').innerHTML = `<tr><td style="font-weight:bold; text-align: left;">DBI Classified</td><td style="text-align:center;">${validTotal}</td></tr><tr><td style="font-weight:bold; text-align: left;">Children age > 5 years</td><td style="text-align:center;">${counts.Over5}</td></tr><tr><td style="font-weight:bold; text-align: left;">Implausible data</td><td style="text-align:center;">${counts.Implausible}</td></tr><tr><td style="font-weight:bold; text-align: left;">Data entry error</td><td style="text-align:center;">${counts.Error}</td></tr><tr style="background:#2e7d32; color:white; font-weight:bold"><td style="text-align: left;">Total (N)</td><td style="text-align:center;">${grandTotal}</td></tr>`;
+        if (chartInstance) chartInstance.destroy();
+        chartInstance = new Chart(document.getElementById('dbiChart').getContext('2d'), { type: 'doughnut', data: { labels: chartLabels, datasets: [{ data: chartData, backgroundColor: chartColors, hoverOffset: 12 }] }, options: { responsive: true, maintainAspectRatio: false, layout: { padding: 0 }, plugins: { legend: { position: 'bottom', labels: { boxWidth: 10, font: { size: 11 }, padding: 15 } } } } });
+    }
 </script>
 </body>
 </html>
