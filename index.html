@@ -53,12 +53,15 @@
         .export-btn { background-color: #2e7d32; color: white; border: none; padding: 4px 8px; cursor: pointer; font-weight: bold; border-radius: 4px; font-size: 11px; transition: background 0.2s; }
         .export-btn:hover { background-color: #1b5e20; }
 
+        /* User Guide Styles */
         .guide-grid-2, .guide-grid-3 { display: grid; gap: 20px; margin-bottom: 20px; }
         @media(min-width: 800px) { .guide-grid-2 { grid-template-columns: 1fr 1fr; } .guide-grid-3 { grid-template-columns: 1fr 1fr 1fr; } }
-        .guide-box { background: white; padding: 20px; border-radius: 8px; border: 1px solid #ccc; box-shadow: 0 2px 4px rgba(0,0,0,0.05); font-size: 14px; line-height: 1.6; color: #333;}
-        .guide-box h2, .guide-box h3 { margin-top: 0; color: #e91e63; border-bottom: 2px solid #eee; padding-bottom: 10px; font-size: 18px;}
+        .guide-box { background: white; padding: 20px; border-radius: 8px; border: 1px solid #f8bbd0; box-shadow: 0 2px 4px rgba(0,0,0,0.05); font-size: 14px; line-height: 1.6; color: #333;}
+        .guide-box h2, .guide-box h3 { margin-top: 0; color: #e91e63; border-bottom: 2px solid #fce4ec; padding-bottom: 10px; font-size: 18px;}
         .tech-note { background-color: #fce4ec; border-left: 5px solid #e91e63; padding: 20px; margin-top: 20px; font-size: 14px; line-height: 1.6; border-radius: 0 8px 8px 0;}
         .tech-note h3 { margin-top: 0; color: #c2185b; border-bottom: none; font-size: 18px;}
+        .contact-box { background-color: #f8bbd0; color: #880e4f; padding: 15px; margin-top: 20px; text-align: center; border-radius: 8px; border: 1px solid #f48fb1; font-size: 14px; line-height: 1.5; }
+        .copyright-notice { font-size: 13px; color: #880e4f; background-color: #fce4ec; text-align: center; margin-top: 20px; padding: 15px; border: 1px solid #f8bbd0; border-radius: 8px; font-weight: bold; box-shadow: 0 2px 4px rgba(0,0,0,0.05);}
         
         /* Modal & PFD Form Styles */
         .modal-overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.7); z-index: 2000; justify-content: center; align-items: center; }
@@ -74,12 +77,19 @@
 
         .pfd-section { margin-bottom: 25px; border: 1px solid #ccc; border-radius: 6px; background: white; overflow: hidden; }
         .pfd-section-header { background: #e1bee7; color: #4a148c; padding: 10px 15px; font-weight: bold; font-size: 16px; display: flex; justify-content: space-between; align-items: center;}
-        .pfd-section-body { padding: 15px; display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
+        .pfd-section-body { padding: 15px; }
+        
+        .pfd-grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
         .pfd-full-width { grid-column: span 2; }
         
-        .form-group { display: flex; flex-direction: column; }
-        .form-group label { font-size: 12px; font-weight: bold; color: #333; margin-bottom: 4px; }
-        .form-group select, .form-group input[type="text"] { font-size: 13px; padding: 6px; border: 1px solid #aaa; border-radius: 4px; }
+        /* Compact Question Formatting */
+        .q-row { display: flex; justify-content: space-between; align-items: flex-start; border-bottom: 1px solid #eee; padding: 10px 0; }
+        .q-row:last-child { border-bottom: none; }
+        .q-text { flex-grow: 1; padding-right: 15px; }
+        .q-text-main { font-size: 14px; font-weight: bold; color: #333; margin-bottom: 3px; }
+        .q-text-sub { font-size: 11px; font-style: italic; color: #666; }
+        .compact-select { width: 60px; font-size: 14px; font-weight: bold; padding: 4px; text-align: center; border: 1px solid #aaa; border-radius: 4px; cursor: pointer; }
+        .compact-select-med { width: 70px; font-size: 13px; font-weight: bold; padding: 4px; border: 1px solid #aaa; border-radius: 4px; cursor: pointer;}
         
         /* Dynamic Score Boxes */
         .score-box { background: #eee; padding: 6px 10px; border-radius: 4px; font-weight: bold; font-size: 13px; text-align: center; border: 1px solid #ccc;}
@@ -89,24 +99,30 @@
 
         /* Report Styles (A4 Simulation inside Modal) */
         .report-page { background: white; padding: 20px; font-family: Arial, sans-serif; color: #000; }
-        .report-title { text-align: center; color: #4a148c; font-size: 26px; font-weight: bold; margin-bottom: 10px; }
-        .report-line { border-top: 3px solid #4a148c; margin-bottom: 20px; }
-        .report-table { width: 100%; border-collapse: collapse; font-size: 14px; }
+        .report-header-box { border: 2px solid #000; background-color: #f0f0f0; padding: 15px; text-align: center; margin-bottom: 25px; }
+        .report-title { color: #4a148c; font-size: 24px; font-weight: bold; margin: 0; text-transform: uppercase; letter-spacing: 1px;}
+        .report-table { width: 100%; border-collapse: collapse; font-size: 14px; margin-bottom: 20px;}
         .report-table th, .report-table td { border: 2px solid #000; padding: 12px; text-align: left; }
-        .report-table th { width: 35%; color: #4a148c; font-weight: bold; background: #fafafa; }
+        .report-table th { width: 35%; color: #000; font-weight: bold; background: #fafafa; }
+        .report-table-section { background-color: #e0e0e0; font-weight: bold; text-align: center !important; font-size: 16px; letter-spacing: 1px; }
         
         .txt-red { font-weight: bold; color: #d32f2f; }
         .txt-orange { font-weight: bold; color: #f57c00; }
         .txt-green { font-weight: bold; color: #388e3c; }
         .txt-neutral { font-weight: bold; color: #333; }
+        
+        .catchy-note { background-color: #ffeb3b; color: #d84315; font-weight: bold; padding: 15px; border-radius: 6px; border: 2px solid #ff9800; text-align: center; margin-top: 15px; font-size: 14px;}
 
         /* Print Overlay Styles */
+        #printArea { display: none; }
         @media print {
+            @page { size: A4 portrait; margin: 15mm; }
             body * { visibility: hidden; }
-            #reportPrintContent, #reportPrintContent * { visibility: visible; }
-            #reportPrintContent { position: absolute; left: 0; top: 0; width: 100%; height: 100%; margin: 0; padding: 20mm; }
-            .no-print { display: none !important; }
-            .report-table th, .report-table td { border: 1px solid #000 !important; }
+            #printArea, #printArea * { visibility: visible; }
+            #printArea { display: block; position: absolute; left: 0; top: 0; width: 100%; padding: 0;}
+            .report-page { padding: 0; }
+            .report-header-box { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+            .report-table th, .report-table td { border: 1px solid #000 !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
         }
     </style>
 </head>
@@ -182,7 +198,7 @@
     <div id="pfd" class="tab-content" style="border-color: #9c27b0; background-color: #f3e5f5;">
         <div class="summary-table" style="max-width: 1150px; margin: 0 auto; background: white; padding: 20px; border-radius: 8px; border: 1px solid #ccc; box-shadow: 0 2px 4px rgba(0,0,0,0.05);">
             <div class="header-with-btn"><h3 style="margin: 0; color: #9c27b0; font-size: 18px;">Eligible Children for PFD Assessment</h3></div>
-            <div class="table-scroll-container" style="max-height: 55vh;">
+            <div class="table-scroll-container" style="max-height: 50vh;">
                 <table id="pfdTable">
                     <thead><tr>
                         <th style="background-color: #9c27b0; color: white;">SN</th>
@@ -197,39 +213,93 @@
                     <tbody id="pfdBody"></tbody>
                 </table>
             </div>
-            <p style="font-size: 13px; color: #555; margin-top: 15px; text-align: center;">
-                * Filters children: <strong>Age > 180 days</strong> AND <strong>DBI Category is B, C, D, E, or G</strong>.
-            </p>
+            <div class="catchy-note">
+                Note: Those children in the age group 6 to 59 months and DBI category B, C, D, E or G will go through PFD assessment.
+            </div>
         </div>
     </div>
 
-    <!-- TAB 4: User Guide -->
-    <div id="guide" class="tab-content">
-        <div class="guide-box">
-            <h2>Standard Operating Procedures (SoP)</h2>
-            <p><strong>Step 1:</strong> Open the web tool by clicking the hyperlink shared through WhatsApp/Email. You must enter all data on the tab named <strong>DBI Calculator</strong>.</p>
-            <p><strong>Step 2:</strong> Type <strong>Doctor</strong> or Facility Name.</p>
-            <p><strong>Step 3:</strong> Type the <strong>name</strong> of the child.</p>
-            <p><strong>Step 4:</strong> Enter <strong>Survey date</strong> (MM/DD/YYYY format).</p>
-            <p><strong>Step 5:</strong> Enter <strong>Birth date</strong> (MM/DD/YYYY format).</p>
-            <p><strong>Step 6:</strong> Enter <strong>Gender</strong> (m or f).</p>
-            <p><strong>Step 7:</strong> Enter <strong>Weight</strong> (kg).</p>
-            <p><strong>Step 8:</strong> Enter <strong>Height</strong> (cm) and press Enter or click outside the box.</p>
+    <!-- TAB 4: User Guide (Restored Completely) -->
+    <div id="guide" class="tab-content" style="border-color: #e91e63; background-color: #fce4ec;">
+        <div class="guide-grid-2">
+            <div class="guide-box">
+                <h2>Standard Operating Procedures (SoP)</h2>
+                <p><strong>Step 1:</strong> Open the web tool by clicking the hyperlink shared through WhatsApp/Email. You must enter all data on the tab named <strong>DBI Calculator</strong>.</p>
+                <p><strong>Step 2:</strong> Type <strong>Doctor</strong> or Facility Name.</p>
+                <p><strong>Step 3:</strong> Type the <strong>name</strong> of the child.</p>
+                <p><strong>Step 4:</strong> Enter <strong>Survey date</strong> (MM/DD/YYYY format).</p>
+                <p><strong>Step 5:</strong> Enter <strong>Birth date</strong> (MM/DD/YYYY format).</p>
+                <p><strong>Step 6:</strong> Enter <strong>Gender</strong> (m or f).</p>
+                <p><strong>Step 7:</strong> Enter <strong>Weight</strong> (kg).</p>
+                <p><strong>Step 8:</strong> Enter <strong>Height</strong> (cm) and press Enter or click outside the box.</p>
+            </div>
+            
+            <div class="guide-box">
+                <h2>Guide for Bulk Excel Import</h2>
+                <p>If you have existing data for many children, you can paste it directly into the tool to calculate everything instantly.</p>
+                <ol>
+                    <li style="margin-bottom: 8px;"><strong>Prepare your Excel file:</strong> Ensure your data is arranged in exactly these 7 columns in this specific order: <em>Doctor/Facility Name, Name of Child, Survey Date, Birth Date, Gender (m/f), Weight (kg), Height (cm)</em>.</li>
+                    <li style="margin-bottom: 8px;"><strong>Copy the data:</strong> Highlight and copy the rows containing your data. Do not copy the header row. (You can paste up to 5,000 rows at a time).</li>
+                    <li style="margin-bottom: 8px;"><strong>Paste into the tool:</strong> Go to the <strong>DBI Calculator</strong> tab and scroll to the bottom. Click inside the white text box under "Bulk Excel Import" and paste your copied data (Ctrl+V).</li>
+                    <li><strong>Import:</strong> Click the blue <strong>Import Data</strong> button. The tool will automatically create the rows and instantly display all calculations and DBI categories.</li>
+                </ol>
+            </div>
         </div>
+
+        <div class="guide-grid-3">
+            <div class="guide-box">
+                <h3>Automatic Calculations</h3>
+                <p>After data entry, the nutrition status – underweight (WAZ), stunting (HAZ) and wasting (WHZ) is calculated and reflected automatically.</p>
+                <ul style="padding-left: 20px;">
+                    <li style="margin-bottom: 5px;"><strong>Underweight</strong> reflects in the Weight for Age Status column.</li>
+                    <li style="margin-bottom: 5px;"><strong>Stunting</strong> reflects in the Height for Age Status column.</li>
+                    <li style="margin-bottom: 5px;"><strong>Wasting</strong> reflects in the Weight for Height column.</li>
+                    <li><strong>DBI category</strong> reflects in the final column.</li>
+                </ul>
+            </div>
+            
+            <div class="guide-box">
+                <h3>Summary Dashboard</h3>
+                <p>The second tab named <strong>Double Burden Index Summary</strong> has a table, pie-chart and Cohort's number.</p>
+                <p>This automatically aggregates and shows the total number of children sorted from A to I categories for rapid reporting.</p>
+            </div>
+            
+            <div class="guide-box">
+                <h3>General Notes</h3>
+                <ul style="padding-left: 20px;">
+                    <li style="margin-bottom: 10px;"><strong>Mobile Access:</strong> Runs directly in your mobile browser without apps!</li>
+                    <li style="margin-bottom: 10px;"><strong>Tutorial:</strong> Refer to the following video - <a href="https://drive.google.com/file/d/1jjDfT88PhgFN9V5d4Ii4_Qvw_P8qjwmD/view?usp=sharing" target="_blank" style="color:#e91e63;">View Video</a></li>
+                    <li><strong>Editing:</strong> Enter data only in cells under <em>*Data Entry Cells - (Compulsory)*</em>.</li>
+                </ul>
+            </div>
+        </div>
+
         <div class="tech-note">
             <h3>Technical Note: Calculation Assumptions</h3>
-            <p><strong>DBI Classification Limits:</strong> Uses a Z‑score less than −2 to classify low weight-for-age, low height-for-age, and low weight-for-length.</p>
+            <p><strong>DBI Classification Limits:</strong> DBI classification uses a Z‑score less than −2 to classify low weight-for-age as “underweight”, low length/height-for-age as “stunted”, and low weight-for-length as “wasted”. Similarly a Z‑score above +2 is used to classify weight-for-height as “Overweight/Obesity”.</p>
+            <p><strong>LMS Method:</strong> The computation of percentiles and z-scores for all three indicators uses formulae based on the LMS method given by Cole and Green in 1992, matching WHO Anthro software.</p>
+            <p><strong>Underweight-Obesity Anomaly:</strong> Mathematically impossible. Represents a theoretical reality only in rare Severe IUGR cases with profoundly compromised length. If flagged, data requires re-verification.</p>
+            <p><strong>Age Limit:</strong> Tool will not function for children > 5 years (60 months) per WHO 2006 standards.</p>
+            <p><strong>Minimum Length:</strong> No classification for length < 45 cm per WHO standards.</p>
+        </div>
+        
+        <div class="contact-box">
+            <strong>Contact:</strong> Mr. Gagan Gautam, Consultant to UNICEF Maharashtra (<a href="mailto:gautamgagan.work@gmail.com" style="color: #880e4f; font-style: italic; text-decoration: underline;">gautamgagan.work@gmail.com</a>), Dr. Mrudula Phadke, Senior Advisor to UNICEF Maharashtra (<a href="mailto:drmapaa@yahoo.com" style="color: #880e4f; font-style: italic; text-decoration: underline;">drmapaa@yahoo.com</a>)
+        </div>
+
+        <div class="copyright-notice">
+            &copy; 2026 Phadke, Gautam, Nair, and Rade. All rights reserved. The underlying methodology, logic, and interface may not be reproduced, copied, or distributed without explicit written permission.
         </div>
     </div>
 
     <!-- ================= PFD DIAGNOSTIC MODAL ================= -->
     <div id="pfdModal" class="modal-overlay">
         <div class="modal-content">
-            <div class="modal-header no-print">
+            <div class="modal-header">
                 <h3>Pediatric Feeding Disorder (PFD) Diagnostic Checklist</h3>
                 <span class="modal-close" onclick="closePfdModal()">&times;</span>
             </div>
-            <div class="modal-body no-print">
+            <div class="modal-body">
                 <div class="child-snapshot" id="modalChildSnapshot"></div>
 
                 <form id="pfdAssessmentForm">
@@ -240,37 +310,43 @@
                             <span>Danger Signs & Decisions</span>
                             <span id="dangerStatusBox" class="score-box score-green">🟢 CLEAR: Proceed to 4-Domain Screen</span>
                         </div>
-                        <div class="pfd-section-body">
-                            <div class="form-group"><label>IMNCI Danger Signs</label><select id="m_imnci" onchange="calcDanger()"><option value="No">No</option><option value="Yes">Yes</option></select></div>
-                            <div class="form-group"><label>SAM - Complications</label><select id="m_sam" onchange="calcDanger()"><option value="No">No</option><option value="Yes">Yes</option></select></div>
+                        <div class="pfd-section-body pfd-grid-2">
+                            <div class="q-row">
+                                <div class="q-text"><div class="q-text-main">IMNCI Danger Signs</div></div>
+                                <select id="m_imnci" class="compact-select-med" onchange="calcDanger()"><option value="No">No</option><option value="Yes">Yes</option></select>
+                            </div>
+                            <div class="q-row">
+                                <div class="q-text"><div class="q-text-main">SAM - Complications</div></div>
+                                <select id="m_sam" class="compact-select-med" onchange="calcDanger()"><option value="No">No</option><option value="Yes">Yes</option></select>
+                            </div>
                         </div>
                     </div>
 
                     <!-- A. Medical -->
                     <div class="pfd-section">
                         <div class="pfd-section-header"><span>A. Medical Domain</span></div>
-                        <div class="pfd-section-body">
-                            <div class="form-group"><label>Medical: Anatomical</label><select id="m_ana"><option value="No">No</option><option value="Yes">Yes</option></select></div>
-                            <div class="form-group"><label>Medical: Neurological</label><select id="m_neuro"><option value="No">No</option><option value="Yes">Yes</option></select></div>
-                            <div class="form-group"><label>Medical: Chronic Infections</label><select id="m_inf"><option value="No">No</option><option value="Yes">Yes</option></select></div>
-                            <div class="form-group"><label>Medical: Chronic Conditions</label><select id="m_cond"><option value="No">No</option><option value="Yes">Yes</option></select></div>
-                            <div class="form-group"><label>Medical: Cardiac</label><select id="m_card"><option value="No">No</option><option value="Yes">Yes</option></select></div>
-                            <div class="form-group"><label>Medical: Hematological</label><select id="m_hema"><option value="No">No</option><option value="Yes">Yes</option></select></div>
-                            <div class="form-group"><label>Medical: Renal</label><select id="m_renal"><option value="No">No</option><option value="Yes">Yes</option></select></div>
-                            <div class="form-group"><label>Medical: Gastrointestinal</label><select id="m_gastro"><option value="No">No</option><option value="Yes">Yes</option></select></div>
-                            <div class="form-group pfd-full-width"><label>Remarks</label><input type="text" id="m_remarks" placeholder="Enter clinical remarks..."></div>
+                        <div class="pfd-section-body pfd-grid-2">
+                            <div class="q-row"><div class="q-text"><div class="q-text-main">Medical: Anatomical</div></div><select id="m_ana" class="compact-select-med"><option value="No">No</option><option value="Yes">Yes</option></select></div>
+                            <div class="q-row"><div class="q-text"><div class="q-text-main">Medical: Neurological</div></div><select id="m_neuro" class="compact-select-med"><option value="No">No</option><option value="Yes">Yes</option></select></div>
+                            <div class="q-row"><div class="q-text"><div class="q-text-main">Medical: Chronic Infections</div></div><select id="m_inf" class="compact-select-med"><option value="No">No</option><option value="Yes">Yes</option></select></div>
+                            <div class="q-row"><div class="q-text"><div class="q-text-main">Medical: Chronic Conditions</div></div><select id="m_cond" class="compact-select-med"><option value="No">No</option><option value="Yes">Yes</option></select></div>
+                            <div class="q-row"><div class="q-text"><div class="q-text-main">Medical: Cardiac</div></div><select id="m_card" class="compact-select-med"><option value="No">No</option><option value="Yes">Yes</option></select></div>
+                            <div class="q-row"><div class="q-text"><div class="q-text-main">Medical: Hematological</div></div><select id="m_hema" class="compact-select-med"><option value="No">No</option><option value="Yes">Yes</option></select></div>
+                            <div class="q-row"><div class="q-text"><div class="q-text-main">Medical: Renal</div></div><select id="m_renal" class="compact-select-med"><option value="No">No</option><option value="Yes">Yes</option></select></div>
+                            <div class="q-row"><div class="q-text"><div class="q-text-main">Medical: Gastrointestinal</div></div><select id="m_gastro" class="compact-select-med"><option value="No">No</option><option value="Yes">Yes</option></select></div>
+                            <div class="pfd-full-width" style="margin-top: 10px;"><div class="q-text-main">Remarks</div><input type="text" id="m_remarks" style="width:100%; padding:8px; border:1px solid #ccc;" placeholder="Enter clinical remarks..."></div>
                         </div>
                     </div>
 
                     <!-- B. Nutritional -->
                     <div class="pfd-section">
                         <div class="pfd-section-header"><span>B. Nutritional Domain</span></div>
-                        <div class="pfd-section-body">
-                            <div class="form-group"><label>Meets Minimum Meal Frequency (MMF)?</label><select id="n_mmf"><option value="Yes">Yes</option><option value="No">No</option></select></div>
-                            <div class="form-group"><label>Meets Minimum Dietary Diversity (MDD)?</label><select id="n_mdd"><option value="Yes">Yes</option><option value="No">No</option></select></div>
-                            <div class="form-group"><label>Meets Minimum Meal Quantity (MMQ)?</label><select id="n_mmq"><option value="Yes">Yes</option><option value="No">No</option></select></div>
-                            <div class="form-group"><label>Age-Appropriate Consistency?</label><select id="n_aac"><option value="Yes">Yes</option><option value="No">No</option></select></div>
-                            <div class="form-group pfd-full-width"><label>24-Hour Recall / Diet Notes</label><input type="text" id="n_notes" placeholder="Enter dietary recall notes..."></div>
+                        <div class="pfd-section-body pfd-grid-2">
+                            <div class="q-row"><div class="q-text"><div class="q-text-main">Meets Minimum Meal Frequency (MMF)?</div></div><select id="n_mmf" class="compact-select-med"><option value="Yes">Yes</option><option value="No">No</option></select></div>
+                            <div class="q-row"><div class="q-text"><div class="q-text-main">Meets Minimum Dietary Diversity (MDD)?</div></div><select id="n_mdd" class="compact-select-med"><option value="Yes">Yes</option><option value="No">No</option></select></div>
+                            <div class="q-row"><div class="q-text"><div class="q-text-main">Meets Minimum Meal Quantity (MMQ)?</div></div><select id="n_mmq" class="compact-select-med"><option value="Yes">Yes</option><option value="No">No</option></select></div>
+                            <div class="q-row"><div class="q-text"><div class="q-text-main">Age-Appropriate Consistency?</div></div><select id="n_aac" class="compact-select-med"><option value="Yes">Yes</option><option value="No">No</option></select></div>
+                            <div class="pfd-full-width" style="margin-top: 10px;"><div class="q-text-main">24-Hour Recall / Diet Notes</div><input type="text" id="n_notes" style="width:100%; padding:8px; border:1px solid #ccc;" placeholder="Enter dietary recall notes..."></div>
                         </div>
                     </div>
 
@@ -281,20 +357,21 @@
                             <span id="mchStatusBox" class="score-box score-green">No difficulties (0)</span>
                         </div>
                         <div class="pfd-section-body">
-                            <div class="form-group"><label>1. Mealtime difficulty*</label><select class="mch-score" id="fs_1" onchange="calcMCH()"></select></div>
-                            <div class="form-group"><label>2. Worry about eating</label><select class="mch-score" id="fs_2" onchange="calcMCH()"></select></div>
-                            <div class="form-group"><label>3. Child's appetite*</label><select class="mch-score" id="fs_3" onchange="calcMCH()"></select></div>
-                            <div class="form-group"><label>4. When refusal starts*</label><select class="mch-score" id="fs_4" onchange="calcMCH()"></select></div>
-                            <div class="form-group"><label>5. Mealtime duration</label><select class="mch-score" id="fs_5" onchange="calcMCH()"></select></div>
-                            <div class="form-group"><label>6. Child behavior</label><select class="mch-score" id="fs_6" onchange="calcMCH()"></select></div>
-                            <div class="form-group"><label>7. Gag/spit/vomit</label><select class="mch-score" id="fs_7" onchange="calcMCH()"></select></div>
-                            <div class="form-group"><label>8. Holding food without swallowing*</label><select class="mch-score" id="fs_8" onchange="calcMCH()"></select></div>
-                            <div class="form-group"><label>9. Distractions/following child</label><select class="mch-score" id="fs_9" onchange="calcMCH()"></select></div>
-                            <div class="form-group"><label>10. Force feeding*</label><select class="mch-score" id="fs_10" onchange="calcMCH()"></select></div>
-                            <div class="form-group"><label>11. Chewing/sucking abilities</label><select class="mch-score" id="fs_11" onchange="calcMCH()"></select></div>
-                            <div class="form-group"><label>12. Growth perception*</label><select class="mch-score" id="fs_12" onchange="calcMCH()"></select></div>
-                            <div class="form-group"><label>13. Effect on caregiver relationship*</label><select class="mch-score" id="fs_13" onchange="calcMCH()"></select></div>
-                            <div class="form-group"><label>14. Effect on family relationship</label><select class="mch-score" id="fs_14" onchange="calcMCH()"></select></div>
+                            <!-- Questions mapped exactly to image -->
+                            <div class="q-row"><div class="q-text"><div class="q-text-main">1. How do you find mealtimes with your child?</div><div class="q-text-sub">1 - Very difficult to 7 - Easy</div></div><select class="mch-score compact-select" id="fs_1" onchange="calcMCH()"></select></div>
+                            <div class="q-row"><div class="q-text"><div class="q-text-main">2. How worried are you about your child's eating?</div><div class="q-text-sub">1 - Not worried to 7 - Very worried</div></div><select class="mch-score compact-select" id="fs_2" onchange="calcMCH()"></select></div>
+                            <div class="q-row"><div class="q-text"><div class="q-text-main">3. How much appetite (hunger) does your child have?</div><div class="q-text-sub">1 - Never hungry to 7 - Good appetite</div></div><select class="mch-score compact-select" id="fs_3" onchange="calcMCH()"></select></div>
+                            <div class="q-row"><div class="q-text"><div class="q-text-main">4. When does your child start refusing to eat during mealtimes?</div><div class="q-text-sub">1 - At the beginning to 7 - At the end</div></div><select class="mch-score compact-select" id="fs_4" onchange="calcMCH()"></select></div>
+                            <div class="q-row"><div class="q-text"><div class="q-text-main">5. How long do mealtimes take for your child (in minutes)?</div><div class="q-text-sub">1: 1-10, 2: 11-20, 3: 21-30, 4: 31-40, 5: 41-50, 6: 51-60, 7: >60 min</div></div><select class="mch-score compact-select" id="fs_5" onchange="calcMCH()"></select></div>
+                            <div class="q-row"><div class="q-text"><div class="q-text-main">6. How does your child behave during mealtimes?</div><div class="q-text-sub">1 - Behaves well to 7 - Acts up, makes a big fuss</div></div><select class="mch-score compact-select" id="fs_6" onchange="calcMCH()"></select></div>
+                            <div class="q-row"><div class="q-text"><div class="q-text-main">7. Does your child gag or spit or vomit with certain types of food?</div><div class="q-text-sub">1 - Never to 7 - Most of the time</div></div><select class="mch-score compact-select" id="fs_7" onchange="calcMCH()"></select></div>
+                            <div class="q-row"><div class="q-text"><div class="q-text-main">8. Does your child hold food in his/her mouth without swallowing it?</div><div class="q-text-sub">1 - Most of the time to 7 - Never</div></div><select class="mch-score compact-select" id="fs_8" onchange="calcMCH()"></select></div>
+                            <div class="q-row"><div class="q-text"><div class="q-text-main">9. Do you have to follow your child around or use distractions (toys, TV) so that your child will eat?</div><div class="q-text-sub">1 - Never to 7 - Most of the time</div></div><select class="mch-score compact-select" id="fs_9" onchange="calcMCH()"></select></div>
+                            <div class="q-row"><div class="q-text"><div class="q-text-main">10. Do you have to force your child to eat or drink?</div><div class="q-text-sub">1 - Most of the time to 7 - Never</div></div><select class="mch-score compact-select" id="fs_10" onchange="calcMCH()"></select></div>
+                            <div class="q-row"><div class="q-text"><div class="q-text-main">11. How are your child's chewing (or sucking) abilities?</div><div class="q-text-sub">1 - Good to 7 - Very poor</div></div><select class="mch-score compact-select" id="fs_11" onchange="calcMCH()"></select></div>
+                            <div class="q-row"><div class="q-text"><div class="q-text-main">12. How do you find your child's growth?</div><div class="q-text-sub">1 - Growing poorly to 7 - Growing well</div></div><select class="mch-score compact-select" id="fs_12" onchange="calcMCH()"></select></div>
+                            <div class="q-row"><div class="q-text"><div class="q-text-main">13. How does your child's feeding influence your relationship with him/her?</div><div class="q-text-sub">1 - Very negatively to 7 - Not at all</div></div><select class="mch-score compact-select" id="fs_13" onchange="calcMCH()"></select></div>
+                            <div class="q-row"><div class="q-text"><div class="q-text-main">14. How does your child's feeding influence your family relationships?</div><div class="q-text-sub">1 - Not at all to 7 - Very negatively</div></div><select class="mch-score compact-select" id="fs_14" onchange="calcMCH()"></select></div>
                         </div>
                     </div>
 
@@ -305,15 +382,18 @@
                             <span id="phqStatusBox" class="score-box score-green">Minimal or No Depression (0)</span>
                         </div>
                         <div class="pfd-section-body">
-                            <div class="form-group"><label>Little interest/pleasure</label><select class="phq-score" onchange="calcPsych()"></select></div>
-                            <div class="form-group"><label>Feeling down/hopeless</label><select class="phq-score" onchange="calcPsych()"></select></div>
-                            <div class="form-group"><label>Sleep trouble</label><select class="phq-score" onchange="calcPsych()"></select></div>
-                            <div class="form-group"><label>Tired/little energy</label><select class="phq-score" onchange="calcPsych()"></select></div>
-                            <div class="form-group"><label>Poor appetite / overeating</label><select class="phq-score" onchange="calcPsych()"></select></div>
-                            <div class="form-group"><label>Feeling bad about self</label><select class="phq-score" onchange="calcPsych()"></select></div>
-                            <div class="form-group"><label>Trouble concentrating</label><select class="phq-score" onchange="calcPsych()"></select></div>
-                            <div class="form-group"><label>Moving/speaking slowly or fidgety</label><select class="phq-score" onchange="calcPsych()"></select></div>
-                            <div class="form-group"><label>Thoughts of self-harm</label><select class="phq-score" onchange="calcPsych()"></select></div>
+                            <div style="font-size:12px; font-style:italic; color:#666; margin-bottom:15px; border-bottom:1px solid #eee; padding-bottom:5px;">
+                                Scale: 0 = Not at all, 1 = Several days, 2 = More than half the days, 3 = Nearly every day
+                            </div>
+                            <div class="q-row"><div class="q-text"><div class="q-text-main">Little interest/pleasure</div></div><select class="phq-score compact-select" onchange="calcPsych()"></select></div>
+                            <div class="q-row"><div class="q-text"><div class="q-text-main">Feeling down/hopeless</div></div><select class="phq-score compact-select" onchange="calcPsych()"></select></div>
+                            <div class="q-row"><div class="q-text"><div class="q-text-main">Sleep trouble</div></div><select class="phq-score compact-select" onchange="calcPsych()"></select></div>
+                            <div class="q-row"><div class="q-text"><div class="q-text-main">Tired/little energy</div></div><select class="phq-score compact-select" onchange="calcPsych()"></select></div>
+                            <div class="q-row"><div class="q-text"><div class="q-text-main">Poor appetite / overeating</div></div><select class="phq-score compact-select" onchange="calcPsych()"></select></div>
+                            <div class="q-row"><div class="q-text"><div class="q-text-main">Feeling bad about self</div></div><select class="phq-score compact-select" onchange="calcPsych()"></select></div>
+                            <div class="q-row"><div class="q-text"><div class="q-text-main">Trouble concentrating</div></div><select class="phq-score compact-select" onchange="calcPsych()"></select></div>
+                            <div class="q-row"><div class="q-text"><div class="q-text-main">Moving/speaking slowly or fidgety</div></div><select class="phq-score compact-select" onchange="calcPsych()"></select></div>
+                            <div class="q-row"><div class="q-text"><div class="q-text-main">Thoughts of self-harm</div></div><select class="phq-score compact-select" onchange="calcPsych()"></select></div>
                         </div>
                     </div>
 
@@ -324,22 +404,25 @@
                             <span id="gadStatusBox" class="score-box score-green">Minimal anxiety (0)</span>
                         </div>
                         <div class="pfd-section-body">
-                            <div class="form-group"><label>Nervous/anxious/on edge</label><select class="gad-score" onchange="calcPsych()"></select></div>
-                            <div class="form-group"><label>Cannot stop worrying</label><select class="gad-score" onchange="calcPsych()"></select></div>
-                            <div class="form-group"><label>Worrying too much</label><select class="gad-score" onchange="calcPsych()"></select></div>
-                            <div class="form-group"><label>Trouble relaxing</label><select class="gad-score" onchange="calcPsych()"></select></div>
-                            <div class="form-group"><label>Restless/hard to sit still</label><select class="gad-score" onchange="calcPsych()"></select></div>
-                            <div class="form-group"><label>Easily annoyed/irritable</label><select class="gad-score" onchange="calcPsych()"></select></div>
-                            <div class="form-group"><label>Afraid something awful might happen</label><select class="gad-score" onchange="calcPsych()"></select></div>
+                            <div style="font-size:12px; font-style:italic; color:#666; margin-bottom:15px; border-bottom:1px solid #eee; padding-bottom:5px;">
+                                Scale: 0 = Not at all, 1 = Several days, 2 = More than half the days, 3 = Nearly every day
+                            </div>
+                            <div class="q-row"><div class="q-text"><div class="q-text-main">Nervous/anxious/on edge</div></div><select class="gad-score compact-select" onchange="calcPsych()"></select></div>
+                            <div class="q-row"><div class="q-text"><div class="q-text-main">Cannot stop worrying</div></div><select class="gad-score compact-select" onchange="calcPsych()"></select></div>
+                            <div class="q-row"><div class="q-text"><div class="q-text-main">Worrying too much</div></div><select class="gad-score compact-select" onchange="calcPsych()"></select></div>
+                            <div class="q-row"><div class="q-text"><div class="q-text-main">Trouble relaxing</div></div><select class="gad-score compact-select" onchange="calcPsych()"></select></div>
+                            <div class="q-row"><div class="q-text"><div class="q-text-main">Restless/hard to sit still</div></div><select class="gad-score compact-select" onchange="calcPsych()"></select></div>
+                            <div class="q-row"><div class="q-text"><div class="q-text-main">Easily annoyed/irritable</div></div><select class="gad-score compact-select" onchange="calcPsych()"></select></div>
+                            <div class="q-row"><div class="q-text"><div class="q-text-main">Afraid something awful might happen</div></div><select class="gad-score compact-select" onchange="calcPsych()"></select></div>
                         </div>
                     </div>
                 </form>
 
-                <div style="padding: 10px 20px 0; font-style: italic; color: #555; font-size: 12px; text-align: center; border-top: 1px solid #eee;">
+                <div style="padding: 15px; font-style: italic; color: #4a148c; font-size: 13px; text-align: center; border: 1px dashed #9c27b0; background-color: #f3e5f5; border-radius: 4px; font-weight: bold;">
                     * The Output report of the PFD Assessment is available for review and download on Report section.
                 </div>
             </div>
-            <div class="modal-footer no-print">
+            <div class="modal-footer">
                 <button onclick="closePfdModal()" style="padding: 8px 16px; border: 1px solid #ccc; background: white; border-radius: 4px; cursor: pointer; margin-right: 10px;">Cancel</button>
                 <button onclick="savePfdData()" style="padding: 8px 16px; border: none; background: #9c27b0; color: white; border-radius: 4px; font-weight: bold; cursor: pointer;">Save Assessment</button>
             </div>
@@ -348,17 +431,20 @@
 
     <!-- ================= PRINTABLE REPORT MODAL (A4 Overlay) ================= -->
     <div id="reportModal" class="modal-overlay">
-        <div class="modal-content" style="max-width: 800px;">
-            <div class="modal-header no-print">
+        <div class="modal-content" style="max-width: 800px; max-height: 95vh;">
+            <div class="modal-header">
                 <h3>View Report</h3>
                 <span class="modal-close" onclick="document.getElementById('reportModal').style.display='none'">&times;</span>
             </div>
             
-            <div class="modal-body" id="reportPrintContent" style="padding: 40px; background: white;">
-                <!-- PDF Content Injected Here -->
+            <div class="modal-body" style="padding: 0; background: #e0e0e0; display: flex; justify-content: center;">
+                <!-- PDF A4 Canvas -->
+                <div id="printArea">
+                    <!-- Javascript injects HTML here -->
+                </div>
             </div>
             
-            <div class="modal-footer no-print">
+            <div class="modal-footer">
                 <button onclick="document.getElementById('reportModal').style.display='none'" style="padding: 8px 16px; border: 1px solid #ccc; background: white; border-radius: 4px; cursor: pointer; margin-right: 10px;">Close</button>
                 <button onclick="window.print()" style="padding: 8px 16px; border: none; background: #2e7d32; color: white; border-radius: 4px; font-weight: bold; cursor: pointer;">📥 Download / Print PDF</button>
             </div>
@@ -147879,7 +147965,7 @@
         for(let i=0; i<10; i++) addRow(); 
         let mchOptions = `<option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option><option value="6">6</option><option value="7">7</option>`;
         document.querySelectorAll('.mch-score').forEach(el => el.innerHTML = mchOptions);
-        let psychOptions = `<option value="0">0 - Not at all</option><option value="1">1 - Several days</option><option value="2">2 - More than half the days</option><option value="3">3 - Nearly every day</option>`;
+        let psychOptions = `<option value="0">0</option><option value="1">1</option><option value="2">2</option><option value="3">3</option>`;
         document.querySelectorAll('.phq-score, .gad-score').forEach(el => el.innerHTML = psychOptions);
     };
 
@@ -147936,9 +148022,9 @@
         if(sDate || bDate || gender || !isNaN(w) || !isNaN(h) || childName || facility) {
             if (!childName || !facility) {
                 outDbi.innerText = "Missing Name/Facility";
-                outDbi.style.backgroundColor = "#ffeb3b";
-                row.querySelector('.childName').style.backgroundColor = !childName ? "pink" : "";
-                row.querySelector('.facility').style.backgroundColor = !facility ? "pink" : "";
+                outDbi.style.backgroundColor = "#ffcdd2"; // Pink warning
+                row.querySelector('.childName').style.backgroundColor = !childName ? "#ffcdd2" : "";
+                row.querySelector('.facility').style.backgroundColor = !facility ? "#ffcdd2" : "";
                 return;
             } else {
                 row.querySelector('.childName').style.backgroundColor = "";
@@ -147993,7 +148079,7 @@
         document.querySelectorAll('#tableBody tr').forEach(r => {
             let ageDays = parseInt(r.dataset.ageDays || -1), dbi = r.querySelector('.dbi-cat').innerText.trim();
             let facility = r.querySelector('.facility').value.trim(), child = r.querySelector('.childName').value.trim(), gender = r.querySelector('.gender').value, dob = r.querySelector('.dob').value, ageM = r.querySelector('.age-months').innerText;
-            if (ageDays > 180 && ['B', 'C', 'D', 'E', 'G'].some(letter => dbi.startsWith(letter + ' (')) && child !== "" && facility !== "") {
+            if (ageDays > 180 && ageDays < 1800 && ['B', 'C', 'D', 'E', 'G'].some(letter => dbi.startsWith(letter + ' (')) && child !== "" && facility !== "") {
                 let uniqueId = `${gender?gender.toUpperCase():"X"}-${child.replace(/\s+/g,'').substring(0,3).toUpperCase()}-${facility.replace(/\s+/g,'').substring(0,3).toUpperCase()}-${r.id.split('-')[1]}`;
                 
                 let isCompleted = pfdRecords[uniqueId] ? true : false;
@@ -148010,7 +148096,7 @@
                 pfdBody.appendChild(tr);
             }
         });
-        if (count === 1) pfdBody.innerHTML = `<tr><td colspan="8" style="padding:25px; color:#555;">No children meet criteria (Age > 180 days AND DBI Category B, C, D, E, or G). Both Child Name and Facility must be filled.</td></tr>`;
+        if (count === 1) pfdBody.innerHTML = `<tr><td colspan="8" style="padding:25px; color:#555;">No children meet criteria (Age 6 to 59 months AND DBI Category B, C, D, E, or G). Both Child Name and Facility must be filled.</td></tr>`;
     }
 
     function openPfdModal(id, name, gen, dob, age, dbi) {
@@ -148048,14 +148134,17 @@
         if(!r) return;
         let printHtml = `
             <div class="report-page">
-                <div class="report-title">Clinical Summary Report - PFD Assessment</div>
-                <div class="report-line"></div>
+                <div class="report-header-box">
+                    <div class="report-title">PFD Assessment Report</div>
+                </div>
                 <table class="report-table">
+                    <tr><th colspan="2" class="report-table-section">Patient Demographics</th></tr>
                     <tr><th>Child Unique ID</th><td>${r.id}</td></tr>
                     <tr><th>Child Name</th><td>${r.name}</td></tr>
                     <tr><th>Gender</th><td>${r.gen.toUpperCase() === 'M' ? 'Male' : (r.gen.toUpperCase() === 'F' ? 'Female' : 'N/A')}</td></tr>
                     <tr><th>Date of Birth</th><td>${r.dob}</td></tr>
                     <tr><th>Age in Months</th><td>${r.age}</td></tr>
+                    <tr><th colspan="2" class="report-table-section">Clinical Assessment Results</th></tr>
                     <tr><th>DBI Category</th><td>${r.dbi}</td></tr>
                     <tr><th>Danger Sign</th><td class="${r.colorDanger}">${r.danger}</td></tr>
                     <tr><th>Medical Domain Output</th><td class="txt-neutral">${r.medical}</td></tr>
@@ -148066,7 +148155,7 @@
                 </table>
             </div>
         `;
-        document.getElementById('reportPrintContent').innerHTML = printHtml;
+        document.getElementById('printArea').innerHTML = printHtml;
         document.getElementById('reportModal').style.display = 'flex';
     }
 
@@ -148121,6 +148210,29 @@
         document.getElementById('secondarySummaryBody').innerHTML = `<tr><td style="font-weight:bold; text-align: left;">DBI Classified</td><td style="text-align:center;">${validTotal}</td></tr><tr><td style="font-weight:bold; text-align: left;">Children age > 5 years</td><td style="text-align:center;">${counts.Over5}</td></tr><tr><td style="font-weight:bold; text-align: left;">Implausible data</td><td style="text-align:center;">${counts.Implausible}</td></tr><tr><td style="font-weight:bold; text-align: left;">Data entry error</td><td style="text-align:center;">${counts.Error}</td></tr><tr style="background:#2e7d32; color:white; font-weight:bold"><td style="text-align: left;">Total (N)</td><td style="text-align:center;">${grandTotal}</td></tr>`;
         if (chartInstance) chartInstance.destroy();
         chartInstance = new Chart(document.getElementById('dbiChart').getContext('2d'), { type: 'doughnut', data: { labels: chartLabels, datasets: [{ data: chartData, backgroundColor: chartColors, hoverOffset: 12 }] }, options: { responsive: true, maintainAspectRatio: false, layout: { padding: 0 }, plugins: { legend: { position: 'bottom', labels: { boxWidth: 10, font: { size: 11 }, padding: 15 } } } } });
+    }
+
+    /* --- Unchanged CSV Export Logic --- */
+    function exportTableToCSV() {
+        let csv = []; let rows = document.querySelectorAll("#exportTable tr");
+        for (let i = 0; i < rows.length; i++) { let row = [], cols = rows[i].querySelectorAll("td, th"); for (let j = 0; j < cols.length; j++) row.push('"' + cols[j].innerText + '"'); csv.push(row.join(",")); }
+        let csvFile = new Blob([csv.join("\n")], { type: "text/csv" }); let downloadLink = document.createElement("a"); downloadLink.download = "DBI_Summary_Report.csv"; downloadLink.href = window.URL.createObjectURL(csvFile); downloadLink.style.display = "none"; document.body.appendChild(downloadLink); downloadLink.click(); document.body.removeChild(downloadLink);
+    }
+    function exportCalculatedDataToCSV() {
+        let csv = []; let rows = document.querySelectorAll("#spreadsheet tr");
+        for (let i = 2; i < rows.length; i++) { 
+            let row = [], cols = rows[i].querySelectorAll("td");
+            if (cols.length > 0) {
+                let sn = cols[0].innerText; let fac = cols[1].querySelector("input") ? cols[1].querySelector("input").value : ""; let child = cols[2].querySelector("input") ? cols[2].querySelector("input").value : ""; let sDate = cols[3].querySelector("input") ? cols[3].querySelector("input").value : ""; let bDate = cols[4].querySelector("input") ? cols[4].querySelector("input").value : ""; let ageM = cols[5].innerText; let gender = cols[6].querySelector("select") ? cols[6].querySelector("select").value : ""; let wt = cols[7].querySelector("input") ? cols[7].querySelector("input").value : ""; let ht = cols[8].querySelector("input") ? cols[8].querySelector("input").value : ""; let wazZ = cols[9].innerText; let wazS = cols[10].innerText; let hazZ = cols[11].innerText; let hazS = cols[12].innerText; let whzZ = cols[13].innerText; let whzS = cols[14].innerText; let dbi = cols[15].innerText;
+                if (!sDate && !bDate && !gender && !wt && !ht && !child && !fac) continue;
+                row.push(`"${sn}","${fac}","${child}","${sDate}","${bDate}","${ageM}","${gender}","${wt}","${ht}","${wazZ}","${wazS}","${hazZ}","${hazS}","${whzZ}","${whzS}","${dbi}"`); csv.push(row.join(","));
+            }
+        }
+        let header = '"SN","Facility","Child Name","Survey Date","Birth Date","Age (Months)","Gender","Weight","Height","WAZ Z","WAZ Status","HAZ Z","HAZ Status","WHZ Z","WHZ Status","DBI Category"';
+        let csvFile = new Blob([[header, ...csv].join("\n")], { type: "text/csv" }); let downloadLink = document.createElement("a"); downloadLink.download = "DBI_Calculated_Data.csv"; downloadLink.href = window.URL.createObjectURL(csvFile); downloadLink.style.display = "none"; document.body.appendChild(downloadLink); downloadLink.click(); document.body.removeChild(downloadLink);
+    }
+    function exportChartAsPNG() {
+        let imageURI = document.getElementById('dbiChart').toDataURL("image/png"); let downloadLink = document.createElement('a'); downloadLink.download = 'DBI_Cohort_Chart.png'; downloadLink.href = imageURI; downloadLink.style.display = 'none'; document.body.appendChild(downloadLink); downloadLink.click(); document.body.removeChild(downloadLink);
     }
 </script>
 </body>
